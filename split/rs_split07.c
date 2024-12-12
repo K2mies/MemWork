@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_split01.c                                       :+:      :+:    :+:   */
+/*   rs_split07.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 13:46:39 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/12 11:56:33 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/12 14:34:38 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/12 15:30:53 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-char	*rs_strncpy(char *s1, char *s2, int n);
 char	**rs_split(char *str);
+char	*rs_strncpy(char *s1, char *s2, int n);
 
 int		main(int argc, char **argv)
 {
-	char 	*str;
+	char	*str;
 	char	**res;
 	size_t	i;
 	(void)argc;
 
-	i = 0;
-
 	str = argv[1];
-
 	res = rs_split(str);
+	i = 0;
 	while (res[i])
-	{
 		printf("%s\n", res[i++]);
-	}
 }
 
 char	*rs_strncpy(char *s1, char *s2, int n)
 {
-	int	i;
+	int		i;
 	i = -1;
 	while (i++ < n && s2[i])
 		s1[i] = s2[i];
@@ -44,7 +40,7 @@ char	*rs_strncpy(char *s1, char *s2, int n)
 	return (s1);
 }
 
-char		**rs_split(char *str)
+char	**rs_split(char *str)
 {
 	int	i;
 	int	j;
@@ -65,7 +61,7 @@ char		**rs_split(char *str)
 		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
 			i++;
 	}
-	char **out = (char **)malloc(sizeof(char *) * (wc + 1));
+	char	**out = (char **)malloc(sizeof(char *) * (wc + 1));
 	i = 0;
 	while (str[i])
 	{
@@ -76,8 +72,8 @@ char		**rs_split(char *str)
 			i++;
 		if (i > j)
 		{
-			out[k] = (char *)malloc(sizeof(char) * ((i - j) + 1));
-			rs_strncpy(out[k++], &str[j], i - j);
+			out[k] = (char *)malloc(sizeof(char) * (i - j) + 1);
+			rs_strncpy(out[k++], &str[j], (i - j));
 		}
 	}
 	out[k] = NULL;

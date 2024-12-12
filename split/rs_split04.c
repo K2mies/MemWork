@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_split01.c                                       :+:      :+:    :+:   */
+/*   rs_split04.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 13:46:39 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/12 11:56:33 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/12 12:43:46 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/12 13:30:21 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 char	*rs_strncpy(char *s1, char *s2, int n);
 char	**rs_split(char *str);
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	char 	*str;
+	char	*str;
 	char	**res;
 	size_t	i;
 	(void)argc;
@@ -26,7 +26,6 @@ int		main(int argc, char **argv)
 	i = 0;
 
 	str = argv[1];
-
 	res = rs_split(str);
 	while (res[i])
 	{
@@ -44,7 +43,7 @@ char	*rs_strncpy(char *s1, char *s2, int n)
 	return (s1);
 }
 
-char		**rs_split(char *str)
+char	**rs_split(char *str)
 {
 	int	i;
 	int	j;
@@ -65,7 +64,7 @@ char		**rs_split(char *str)
 		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
 			i++;
 	}
-	char **out = (char **)malloc(sizeof(char *) * (wc + 1));
+	char	**out = malloc(sizeof(char *) * (wc + 1));
 	i = 0;
 	while (str[i])
 	{

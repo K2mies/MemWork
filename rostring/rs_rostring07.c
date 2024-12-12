@@ -1,16 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_rostring06.c                                    :+:      :+:    :+:   */
+/*   rs_rostring07.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 15:43:35 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/12 10:24:33 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/12 10:14:49 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/12 11:23:57 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -22,31 +21,33 @@ void	write_word(int start, int end, char *str)
 
 int		main(int argc, char **argv)
 {
+	char	*str;
 	int		i;
 	int		first_word_start;
 	int		first_word_end;
-	char	*str;
+	
+	i = 0;
 	if (argc > 1)
 	{
 		str = argv[1];
-
 		while (str[i] == ' ' || str[i] == '\t')
-			i++
+			i++;
 		first_word_start = i;
 		while (str[i] && str[i] != ' ' && str[i] != '\t')
 			i++;
 		first_word_end = i;
-
 		if (str[i])
 		{
 			while (str[i])
 			{
 				if (str[i] == ' ' || str[i] == '\t')
 				{
-					while(str[i] == ' ' || str[i] == '\t')
+					while (str[i] == ' ' || str[i] == '\t')
 						i++;
 					if (str[i])
+					{
 						write(1, " ", 1);
+					}
 				}
 				else
 				{

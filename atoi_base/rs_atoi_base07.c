@@ -1,41 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_atoi_base06.c                                   :+:      :+:    :+:   */
+/*   rs_atoi_base07.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 13:08:06 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/12 16:43:31 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/12 16:28:16 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/12 16:44:06 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <unistd.h>
 
-int		rs_isvalid(char ch, int str_base);
-int		rs_atoi_base(const char *str, int str_base);
+int	rs_atoi_base(char *str, int base);
+int	rs_isvalid(char ch, int base);
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	char	*str;
-	int		str_base;
+	int		base;
 	int		res;
 	(void)argc;
 
 	str = argv[1];
-	str_base = atoi(argv[2]);
-	res = rs_atoi_base(str, str_base);
-	printf("res: %d", res);
+	base = atoi(argv[2]);
+	res = rs_atoi_base(str, base);
+	printf("%d\n", res);
 }
 
-int		rs_isvalid(char ch, int str_base)
+int	rs_isvalid(char ch, int base)
 {
-	char	*lcbase = "0123456789abcdef";
-	char	*ucbase = "0123456789ABCDEF";
+	char	*ucbase = "0123456789abcdef";
+	char	*lcbase = "0123456789ABCDEF";
 	int		i;
+
 	i = 0;
-	while (i < str_base)
+
+	while (i < base)
 	{
 		if (ch == lcbase[i] || ch == ucbase[i])
 			return (1);
@@ -44,11 +47,11 @@ int		rs_isvalid(char ch, int str_base)
 	return (0);
 }
 
-int		rs_atoi_base(const char *str, int str_base)
+int	rs_atoi_base(char *str, int base)
 {
-	int		sign;
-	int		res;
-	int		i;
+	int	sign;
+	int	res;
+	int	i;
 
 	sign = 1;
 	res = 0;
@@ -63,9 +66,9 @@ int		rs_atoi_base(const char *str, int str_base)
 	}
 	if (str[i] == '+')
 		i++;
-	while (str[i] && rs_isvalid(str[i], str_base))
+	while (str[i] && rs_isvalid(str[i], base))
 	{
-		res *= str_base;
+		res *= base;
 		if (str[i] >= '0' && str[i] <= '9')
 			res += str[i] - '0';
 		if (str[i] >= 'a' && str[i] <= 'f')

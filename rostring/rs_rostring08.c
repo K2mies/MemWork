@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_rostring06.c                                    :+:      :+:    :+:   */
+/*   rs_rostring08.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 15:43:35 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/12 10:24:33 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/12 10:25:15 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/12 11:24:14 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void	write_word(int start, int end, char *str)
 {
@@ -20,23 +19,24 @@ void	write_word(int start, int end, char *str)
 		write(1, &str[start++], 1);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int		i;
-	int		first_word_start;
-	int		first_word_end;
 	char	*str;
+	int	first_word_start;
+	int	first_word_end;
+	int	i;
+	(void)argc;
+
+	i = 0;
 	if (argc > 1)
 	{
 		str = argv[1];
-
 		while (str[i] == ' ' || str[i] == '\t')
-			i++
+			i++;
 		first_word_start = i;
 		while (str[i] && str[i] != ' ' && str[i] != '\t')
 			i++;
 		first_word_end = i;
-
 		if (str[i])
 		{
 			while (str[i])
@@ -46,7 +46,9 @@ int		main(int argc, char **argv)
 					while(str[i] == ' ' || str[i] == '\t')
 						i++;
 					if (str[i])
+					{
 						write(1, " ", 1);
+					}
 				}
 				else
 				{
@@ -58,6 +60,6 @@ int		main(int argc, char **argv)
 		}
 		write_word(first_word_start, first_word_end, str);
 	}
-	write (1, "\n", 1);
+	write (1, "\n", 1 );
 	return (0);
 }
