@@ -1,35 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_print_bits00.c                                  :+:      :+:    :+:   */
+/*   rs_inter08.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 16:16:17 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/13 11:23:39 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/13 10:09:30 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/13 10:16:16 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-void	print_bits(unsigned char octet)
+void	rs_inter(char *s1, char *s2);
+int	main(int argc, char **argv)
 {
-	int	i = 8;
-	unsigned char	bit;
+	char	*s1;
+	char	*s2;
+	(void)argc;
 
-	while (i--)
-	{
-		bit = (octet >> i & 1) + '0';
-		write(1, &bit, 1);
-	}
+	s1 = argv[1];
+	s2 = argv[2];
+
+	rs_inter(s1, s2);
 }
 
-int		main(int argc, char **argv)
+void	rs_inter(char *s1, char *s2)
 {
-	(void)argc;
-	int	src;
-
-	src = atoi(argv[1]);
-	print_bits(src);
+	int		tab[256] = {0};
+	int		i;
+	i = 0;
+	while (s2[i])
+	{
+		tab[(int)s2[i++]] = 1;
+	}
+	i = 0;
+	while (s1[i])
+	{
+		if (tab[(int)s1[i]] == 1)
+		{
+			write(1, &s1[i], 1);
+			tab[(int)s1[i]] = 2;
+		}
+		i++;
+	}
 }

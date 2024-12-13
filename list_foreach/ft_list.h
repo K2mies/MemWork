@@ -6,7 +6,7 @@
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:48:50 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/09 15:59:52 by rhvidste         ###   ########.fr       */
+/*   Updated: 2024/12/13 13:01:19 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,4 @@ typedef struct	s_list
 {
 	struct	s_list	*next;
 	void			*data;
-}					t_list
+}					t_list;

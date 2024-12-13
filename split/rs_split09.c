@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_split08.c                                       :+:      :+:    :+:   */
+/*   rs_split09.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 15:31:06 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/13 10:28:55 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/13 10:16:51 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/13 13:42:38 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 char	*rs_strncpy(char *s1, char *s2, int n);
 char	**rs_split(char *str);
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	char	*str;
+	char	*src;
 	char	**res;
-	size_t	i;
+	int		i;
 	(void)argc;
 
-	str = argv[1];
-	res = rs_split(str);
+	src = argv[1];
+	res = rs_split(src);
 	i = 0;
 	while (res[i])
 		printf("%s\n", res[i++]);
+
 }
 
 char	*rs_strncpy(char *s1, char *s2, int n)
 {
-	int		i;
+	int	i;
 	i = -1;
 	while (i++ < n && s2[i])
 		s1[i] = s2[i];
@@ -51,14 +52,13 @@ char	**rs_split(char *str)
 	j = 0;
 	k = 0;
 	wc = 0;
-
 	while (str[i])
 	{
 		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
 		if (str[i])
 			wc++;
-		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
+		while (str[i] && (str[i]) != ' ' && str[i] != '\t' && str[i] != '\n')
 			i++;
 	}
 	char	**out = (char **)malloc(sizeof(char *) * (wc + 1));
@@ -68,11 +68,11 @@ char	**rs_split(char *str)
 		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
 		j = i;
-		while (str[i] && (str[i] != ' ' && str[i] != '\t' && str[i] != '\n'))
+		while (str[i] && (str[i]) != ' ' && str[i] != '\t' && str[i] != '\n')
 			i++;
 		if (i > j)
 		{
-			out[k] = (char *)malloc(sizeof(char) *(i - j) + 1);
+			out[k] = malloc(sizeof(char) * (i - j) + 1);
 			rs_strncpy(out[k++], &str[j], (i - j));
 		}
 	}

@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_rostring11.c                                    :+:      :+:    :+:   */
+/*   rs_rostring13.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 15:50:38 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/13 10:40:53 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/13 13:50:46 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/13 14:51:27 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void	write_word(int start, int end, char *str)
 {
@@ -21,44 +22,44 @@ void	write_word(int start, int end, char *str)
 
 int		main(int argc, char **argv)
 {
-	int		i;
-	int		first_word_start;
-	int		first_word_end;
-	char	*str;
-	
+	char *str;
+	int	first_word_start;
+	int	first_word_end;
+	int	i;
+
 	i = 0;
 	if (argc > 1)
 	{
 		str = argv[1];
-		while(str[i] == ' ' || str[i] == '\t')
+		while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 			i++;
 		first_word_start = i;
-		while(str[i] && (str[i] != ' ' && str[i] != '\t'))
+		while (str[i] && (str[i] != ' ' && str[i] != '\t'))
 			i++;
-		first_word_end = i;
+		first_word_end = i;	
 		if (str[i])
 		{
 			while (str[i])
 			{
-				if (str[i] == ' ' || str[i] == '\t')
+				if (str[i] && (str[i] == ' ' || str[i] == '\t'))
 				{
-					while (str[i] == ' ' || str[i] == '\t')
+					while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 						i++;
-					if(str[i])
+					if (str[i])
 					{
 						write(1, " ", 1);
 					}
-				}
+				} 
 				else
 				{
 					write(1, &str[i], 1);
 					i++;
 				}
 			}
-			write(1, " ", 1);
+			write (1, " ", 1);
 		}
 		write_word(first_word_start, first_word_end, str);
 	}
-	write(1, "\n", 1);
+	write (1, "\n", 1);
 	return (0);
-}
+}	
