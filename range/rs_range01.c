@@ -1,35 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_print_bits00.c                                  :+:      :+:    :+:   */
+/*   rs_range01.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/11 16:16:17 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/13 15:35:49 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/13 15:40:02 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/13 15:47:46 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-void	print_bits(unsigned char octet)
+int		*rs_range(int start, int end)
 {
-	int	i = 8;
-	unsigned char	bit;
-
-	while (i--)
+	int		i;
+	int		len;
+	int		*res;
+	i = 0;
+	len = end - start;
+	res = malloc(sizeof(int) * len);
+	if (!res)
+		return (NULL);
+	while(start <= end)
 	{
-		bit = (octet >> i & 1) + '0';
-		write(1, &bit, 1);
+		res[i++] = start++;
 	}
+	return (res);
 }
 
 int		main(int argc, char **argv)
 {
-	(void)argc;
-	int	src;
+	int	*res;
+	int	start;
+	int	end;
+	int	len;
+	int	i;
 
-	src = atoi(argv[1]);
-	print_bits(src);
+	(void)argc;
+
+	start = atoi(argv[1]);
+	end = atoi(argv[2]);
+	len = end - start;
+	res = rs_range(start, end);
+	i = 0;
+	while (i < len + 1)
+	{
+		printf("res[%d] = %d\n", i, res[i]);
+		i++;
+	}
 }

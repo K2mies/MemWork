@@ -1,51 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_cameltosnake00.c                                :+:      :+:    :+:   */
+/*   rs_print_bits01.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/05 16:17:44 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/13 15:38:46 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/13 15:33:23 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/13 15:35:45 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-void	rs_camel_to_snake(const char *str);
+void	print_bits(unsigned char octet)
+{
+	int	i = 8;
+	unsigned char	bit;
+	while (i--)
+	{
+		bit = (octet >> i & 1) + '0';
+		write(1, &bit, 1);
+	}
+}
 
 int		main(int argc, char **argv)
 {
-	char	*str;
-	char	*res;
 	(void)argc;
+	int	src;
 
-	str = argv[1];
-
-	rs_camel_to_snake(str);
-}
-
-void	rs_camel_to_snake(const char *str)
-{
-	size_t	i;
-	char	c;
-
-	c = '0';
-
-	i = 0;
-	while(str[i])
-	{
-		if (str[i] >= 65 && str[i] <=90)
-		{
-			write(1, "_", 1);
-			c = str[i] + 32;
-			write(1, &c, 1);
-		}
-		else
-		{
-			write(1, &str[i], 1);
-		}
-		i++;
-	}
+	src = atoi(argv[1]);
+	print_bits(src);
 }
