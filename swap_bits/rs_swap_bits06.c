@@ -1,53 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_reverse_bits08.c                                :+:      :+:    :+:   */
+/*   rs_swap_bits06.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 15:06:45 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/16 13:53:56 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/16 10:44:08 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/16 17:22:45 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
 
-unsigned char	rs_reverse_bits(unsigned char octet);
+unsigned char	rs_swap_bits(unsigned char octet);
 void	rs_print_bits(unsigned char octet);
 
 int	main(int argc, char **argv)
 {
-	int	src;
-	int	res;
+	int		src;
+	int		res;
 	(void)argc;
 
 	src = atoi(argv[1]);
 	rs_print_bits(src);
-	write (1, "\n", 1);
-	res = rs_reverse_bits(src);
+	write(1, "\n", 1);
+	res = rs_swap_bits(src);
 	rs_print_bits(res);
-	write (1, "\n", 1);
+	write(1, "\n", 1);
 }
 
-unsigned char	rs_reverse_bits(unsigned char octet)
+unsigned char	rs_swap_bits(unsigned char octet)
 {
-	int	i = 8;
-	unsigned char	res;
-	while (i > 0)
-	{
-		res = res * 2 + (octet % 2);
-		octet = octet / 2;
-		i--;
-	}
-	return (res);
+	return ((octet >> 4) | (octet << 4));
 }
 
 void	rs_print_bits(unsigned char octet)
 {
-	int	i = 8;
+	int		i = 8;
 	unsigned char	bit;
-
 	while (i--)
 	{
 		bit = (octet >> i & 1) + '0';

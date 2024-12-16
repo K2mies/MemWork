@@ -1,50 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   rs_inter12.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 11:51:35 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/16 11:48:50 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/16 17:02:20 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/16 17:09:03 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 
-int	ft_atoi(const char *str);
+void	rs_inter(char *s1, char *s2);
 
 int		main(int argc, char **argv)
 {
-	char	*src;
-	int		res;
+	char	*s1;
+	char	*s2;
+
 	(void)argc;
 
-	src = argv[1];
-	res = ft_atoi(src);
-	printf("%d\n", res);
-}
-int	ft_atoi(const char *str)
-{
-	int		res;
-	int		sign;
+	s1 = argv[1];
+	s2 = argv[2];
 
-	res = 0;
-	sign = 1;
-	while (*str == 32 && *str >= 9 && *str <= 13)
-		str++;
-	if (*str == '-')
-	{
-		sign *= -1;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		res = res * 10 + *str - '0';
-		str++;
-	}
-	return (res * sign);
+	rs_inter(s1, s2);
 }
+
+void	rs_inter(char *s1, char *s2)
+{
+	int		tab[256] = {0};
+	int		i;
+	i = 0;
+	while(s2[i])
+		tab[(int)s2[i++]] = 1;
+	i = 0;
+	while (s1[i])
+	{
+		if (tab[(int)s1[i]] == 1)
+		{
+			write(1, &s1[i], 1);
+			tab[(int)s1[i]] = 2;
+		}
+		i++;
+	}
+}
+

@@ -1,50 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   rs_swap_bits07.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 11:51:35 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/16 11:48:50 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/16 17:16:11 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/16 17:23:08 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-int	ft_atoi(const char *str);
+unsigned char	rs_swap_bits(unsigned char octet);
+void	rs_print_bits(unsigned char octet);
 
 int		main(int argc, char **argv)
 {
-	char	*src;
+	int		src;
 	int		res;
 	(void)argc;
 
-	src = argv[1];
-	res = ft_atoi(src);
-	printf("%d\n", res);
+	src = atoi(argv[1]);
+	rs_print_bits(src);
+	write(1, "\n", 1);
+	res = rs_swap_bits(src);
+	rs_print_bits(res);
+	write(1, "\n", 1);
 }
-int	ft_atoi(const char *str)
-{
-	int		res;
-	int		sign;
 
-	res = 0;
-	sign = 1;
-	while (*str == 32 && *str >= 9 && *str <= 13)
-		str++;
-	if (*str == '-')
+unsigned char	rs_swap_bits(unsigned char octet)
+{
+	return ((octet >> 4) | (octet << 4));
+}
+
+void	rs_print_bits(unsigned char octet)
+{
+	int		i = 8;
+	unsigned char	bit;
+	while (i--)
 	{
-		sign *= -1;
-		str++;
+		bit = (octet >> i & 1) + '0';
+		write(1, &bit, 1);
 	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
-	{
-		res = res * 10 + *str - '0';
-		str++;
-	}
-	return (res * sign);
 }

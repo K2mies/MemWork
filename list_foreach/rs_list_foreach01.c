@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_foreach.c                                  :+:      :+:    :+:   */
+/*   rs_list_foreach01.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 16:00:20 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/16 16:24:33 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/16 16:34:46 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/16 16:44:34 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_list.h"
+#include "rs_list.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-void	ft_list_foreach(t_list *begin_list, void (*f)(void *))
+void	rs_list_foreach(t_list *begin_list, void (*f)(void *))
 {
 	while (begin_list)
 	{
@@ -28,9 +28,9 @@ void	print_int(void *data)
 	printf("%d ", *(int*)data);
 }
 
-t_list	*create_node(int value)
+t_list	*rs_create_node(int value)
 {
-	t_list *new = malloc(sizeof(t_list));
+	t_list	*new = malloc(sizeof(t_list));
 	int	*data = malloc(sizeof(int));
 	*data = value;
 	new->data = data;
@@ -38,7 +38,7 @@ t_list	*create_node(int value)
 	return (new);
 }
 
-void	free_list(t_list *list)
+void	rs_free_list(t_list *list)
 {
 	while (list)
 	{
@@ -51,14 +51,14 @@ void	free_list(t_list *list)
 
 int		main()
 {
-	t_list *list = create_node(1);
-	list->next = create_node(2);
-	list->next->next = create_node(3);
+	t_list *list = rs_create_node(1);
+	list->next = rs_create_node(2);
+	list->next->next = rs_create_node(3);
 
 	printf("List contents: ");
-	ft_list_foreach(list, print_int);
+	rs_list_foreach(list, print_int);
 	printf("\n");
 
-	free_list(list);
+	rs_free_list(list);
 	return (0);
 }

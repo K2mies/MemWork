@@ -1,50 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   rs_atoi00.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 11:51:35 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/16 11:48:50 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/16 11:41:03 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/16 12:02:03 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_atoi(const char *str);
+int		rs_atoi(char *str);
 
 int		main(int argc, char **argv)
 {
-	char	*src;
-	int		res;
-	(void)argc;
+		char	*src;
+		int		res;
+		(void)argc;
 
-	src = argv[1];
-	res = ft_atoi(src);
-	printf("%d\n", res);
+		src = argv[1];
+		res = rs_atoi(src);
+		printf("%d\n", res);
 }
-int	ft_atoi(const char *str)
-{
-	int		res;
-	int		sign;
 
-	res = 0;
+int		rs_atoi(char *str)
+{
+	int		sign;
+	int		res;
+	int		i;
+
 	sign = 1;
-	while (*str == 32 && *str >= 9 && *str <= 13)
-		str++;
-	if (*str == '-')
+	res = 0;
+	i = 0;
+	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
+		i++;
+	if (str[i] == '-')
 	{
 		sign *= -1;
-		str++;
+		i++;
 	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
+	if (str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		res = res * 10 + *str - '0';
-		str++;
+		res = res * 10 + str[i] - '0';
+		i++;
 	}
 	return (res * sign);
 }

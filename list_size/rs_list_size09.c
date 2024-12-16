@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_list_size08.c                                   :+:      :+:    :+:   */
+/*   rs_list_size09.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 22:03:14 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/16 11:01:18 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/16 10:49:38 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/16 11:09:18 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rs_list.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdint.h>
 
-int	rs_list_size(t_list *begin_list)
+int		rs_list_size(t_list *begin_list)
 {
 	if (begin_list == 0)
 		return (0);
 	else
-		return (1 + rs_list_size(begin_list->next));
+		return(1 + rs_list_size(begin_list->next));
 }
 
-t_list	*create_node(int data)
+t_list	*rs_create_node(int data)
 {
 	t_list	*new_node = (t_list *)malloc(sizeof(t_list));
 	new_node->data = (void *)(intptr_t)data;
@@ -41,12 +41,12 @@ void	free_list(t_list *head)
 	}
 }
 
-int	main()
+int		main()
 {
-	t_list *list1 = create_node(1);
-	list1->next = create_node(2);
-	list1->next->next = create_node(3);
-	list1->next->next->next = create_node(4);
+	t_list *list1 = rs_create_node(1);
+	list1->next = rs_create_node(2);
+	list1->next->next = rs_create_node(3);
+	list1->next->next->next = rs_create_node(4);
 	printf("Test 01 (for elements): size = %d\n", rs_list_size(list1));
 	free_list(list1);
 }

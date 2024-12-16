@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_itoa21.c                                        :+:      :+:    :+:   */
+/*   rs_itoa23.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/15 21:51:50 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/16 11:29:35 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/16 17:24:02 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/16 17:33:12 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 size_t	rs_strlen(const char *str);
-int	rs_len(int nbr);
+int		rs_len(int nbr);
 char	*rs_itoa(int n);
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
+	int		src;
 	char	*res;
-	int	src;
 	size_t	len;
 	size_t	i;
 	(void)argc;
@@ -29,30 +29,31 @@ int	main(int argc, char **argv)
 	res = rs_itoa(src);
 	len = rs_strlen(res);
 	i = 0;
+
 	while (i < len + 1)
 	{
-		if(res[i] == '\0')
+		if (res[i] == '\0')
 			printf("res[%zu] = \\0\n", i);
 		else
-			printf("res[%zu] = %c\n", i, res[i]);
+			printf("res[%zu] = %c\n", i , res[i]);
 		i++;
 	}
+
 }
 
 size_t	rs_strlen(const char *str)
 {
-	size_t	i;
+	size_t		i;
 	i = 0;
 	while (str[i])
 		i++;
 	return (i);
 }
 
-int	rs_len(int nbr)
+int		rs_len(int nbr)
 {
-	int	i;
+	int		i;
 	i = 0;
-
 	if (nbr == 0)
 		return (1);
 	while (nbr < 0)
@@ -69,11 +70,11 @@ int	rs_len(int nbr)
 }
 
 char	*rs_itoa(int n)
-{
-	char	*res;
+{	
+	int		i;
+	int		len;
 	long	nbr;
-	int	len;
-	int	i;
+	char	*res;
 
 	len = rs_len(n);
 	res = malloc(sizeof(char) * len + 1);
@@ -95,5 +96,4 @@ char	*rs_itoa(int n)
 		res[0] = '0';
 	res[len] = 0;
 	return (res);
-
 }
