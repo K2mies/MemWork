@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_list_foreach02.c                                :+:      :+:    :+:   */
+/*   rs_list_foreach03.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 20:57:13 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/17 11:46:27 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/17 11:38:35 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/17 11:59:06 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rs_list.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
-void	rs_list_foreach(t_list *begin_list, void (*f)(void *))
+void	rs_list_foreach(t_list	*begin_list, void (*f)(void *))
 {
 	while (begin_list)
 	{
@@ -28,7 +28,7 @@ void	print_int(void *data)
 	printf("%d ", *(int*)data);
 }
 
-t_list	*rs_create_node(int value)
+t_list	*rs_create_node(int	value)
 {
 	t_list	*new = malloc(sizeof(t_list));
 	int	*data = malloc(sizeof(int));
@@ -55,7 +55,7 @@ int	main()
 	list->next = rs_create_node(2);
 	list->next->next = rs_create_node(3);
 
-	printf("list contents: ");
+	printf("List contents: ");
 	rs_list_foreach(list, print_int);
 	printf("\n");
 

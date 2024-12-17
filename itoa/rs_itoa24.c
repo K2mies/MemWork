@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_itoa23.c                                        :+:      :+:    :+:   */
+/*   rs_itoa24.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 17:24:02 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/17 11:08:27 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/17 10:56:28 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/17 11:19:47 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,9 @@ int		main(int argc, char **argv)
 		if (res[i] == '\0')
 			printf("res[%zu] = \\0\n", i);
 		else
-			printf("res[%zu] = %c\n", i , res[i]);
+			printf("res[%zu] = %c\n", i, res[i]);
 		i++;
 	}
-
 }
 
 size_t	rs_strlen(const char *str)
@@ -46,12 +45,12 @@ size_t	rs_strlen(const char *str)
 	i = 0;
 	while (str[i])
 		i++;
-	return (i);
+	return(i);
 }
 
 int		rs_len(int nbr)
 {
-	int		i;
+	int	i;
 	i = 0;
 	if (nbr == 0)
 		return (1);
@@ -69,7 +68,7 @@ int		rs_len(int nbr)
 }
 
 char	*rs_itoa(int n)
-{	
+{
 	int		i;
 	int		len;
 	long	nbr;
@@ -95,4 +94,5 @@ char	*rs_itoa(int n)
 		res[0] = '0';
 	res[len] = 0;
 	return (res);
+
 }

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_list_foreach02.c                                :+:      :+:    :+:   */
+/*   rs_list_foreach04.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 20:57:13 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/17 11:46:27 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/17 11:47:53 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/17 11:59:27 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rs_list.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void	rs_list_foreach(t_list *begin_list, void (*f)(void *))
 {
@@ -55,9 +55,8 @@ int	main()
 	list->next = rs_create_node(2);
 	list->next->next = rs_create_node(3);
 
-	printf("list contents: ");
+	printf("List contents: ");
 	rs_list_foreach(list, print_int);
-	printf("\n");
 
 	rs_free_list(list);
 	return (0);
