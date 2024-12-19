@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_list_size20.c                                   :+:      :+:    :+:   */
+/*   rs_list_size28.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 16:26:32 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/19 15:50:36 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/19 15:06:36 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/19 16:01:09 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-int		rs_list_size(t_list *begin_list)
+int	rs_list_size(t_list *begin_list)
 {
 	if (begin_list == 0)
 		return (0);
@@ -33,20 +33,37 @@ t_list	*rs_create_node(int data)
 
 void	rs_free_list(t_list *head)
 {
-	while (head != NULL)
-	{
-		t_list *temp = head;
-		head = head->next;
-		free(temp);
-	}
+	t_list	*temp = head;
+	head = head->next;
+	free(temp);
 }
 
-int		main()
+int		main(int argc, char **argv)
 {
-	t_list *list1 = rs_create_node(1);
-	list1->next = rs_create_node(2);
-	list1->next->next = rs_create_node(3);
-	list1->next->next->next = rs_create_node(4);
-	printf("Test01 (for elements) size : %d\n", rs_list_size(list1));
-	rs_free_list(list1);
+	int		i;
+	int		count;
+	(void)argc;
+
+	i = 0;
+	count = atoi(argv[1]);
+
+	t_list	*head = NULL;
+	t_list	*current = NULL;
+
+	while (i < count)
+	{
+		if (head == NULL)
+		{
+			head = rs_create_node(i);
+			current = head;
+		}
+		else
+		{
+			current->next = rs_create_node(i);
+			current = current->next;
+		}
+		i++;
+	}
+	printf("Test 01 (for elements) size : %d\n", rs_list_size(head));
+	rs_free_list(head);
 }

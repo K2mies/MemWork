@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_list_foreach04.c                                :+:      :+:    :+:   */
+/*   rs_list_foreach05.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:47:53 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/19 14:45:58 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/19 14:36:24 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/19 14:46:13 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	print_int(void *data)
 t_list	*rs_create_node(int value)
 {
 	t_list	*new = malloc(sizeof(t_list));
-	int	*data = malloc(sizeof(int));
-	*data = value;
+	int		*data = malloc(sizeof(int));
+	*data = vlaue;
 	new->data = data;
 	new->next = NULL;
 	return (new);
@@ -45,7 +45,7 @@ void	rs_free_list(t_list *list)
 		t_list	*temp = list;
 		list = list->next;
 		free(temp->data);
-		free(temp);
+		free(temp);	
 	}
 }
 
@@ -54,10 +54,10 @@ int	main()
 	t_list	*list = rs_create_node(1);
 	list->next = rs_create_node(2);
 	list->next->next = rs_create_node(3);
-
+	
 	printf("List contents: ");
 	rs_list_foreach(list, print_int);
 
 	rs_free_list(list);
-	return (0);
+	return (0); 
 }
