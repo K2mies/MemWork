@@ -1,0 +1,42 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rs_prime02.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/21 18:10:26 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/21 18:13:28 by rhvidste         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int	main(int argc, char **argv)
+{
+	int	i;
+	int	num;
+
+	if (argc == 2)
+	{
+		i = 1;
+		num = atoi(argv[1]);
+		if (num == 1)
+			printf("1");
+		while (num >= ++i)
+		{
+			if (num % i == 0)
+			{
+				printf("%d", i);
+				if (num == i)
+					break ;
+				printf("*");
+				num /= i;
+				i = 1;
+			}
+		}
+	}
+	printf("\n");
+	return (0);
+}
