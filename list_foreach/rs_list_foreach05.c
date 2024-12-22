@@ -6,7 +6,7 @@
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 14:36:24 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/19 14:46:13 by rhvidste         ###   ########.fr       */
+/*   Updated: 2024/12/22 15:14:22 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_list	*rs_create_node(int value)
 {
 	t_list	*new = malloc(sizeof(t_list));
 	int		*data = malloc(sizeof(int));
-	*data = vlaue;
+	*data = value;
 	new->data = data;
 	new->next = NULL;
 	return (new);
