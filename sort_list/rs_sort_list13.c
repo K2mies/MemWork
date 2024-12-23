@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_sort_list12.c                                   :+:      :+:    :+:   */
+/*   rs_sort_list13.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/22 20:49:09 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/23 16:08:42 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/23 15:54:56 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/23 16:09:39 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,24 @@
 
 t_list	*rs_sort_list(t_list *list, int (*cmp)(int, int))
 {
-	int	swap;
-	t_list	*start;
-	start = list;
-	while (list != NULL && list->next != NULL)
-	{
-		if ((*cmp)(list->data, list->next->data) == 0)
+		int		swap;
+		t_list	*start;
+		start = list;
+		while (list != NULL && list->next != NULL)
 		{
-			swap = list->data;
-			list->data = list->next->data;
-			list->next->data = swap;
-			list = start;
+			if ((*cmp)(list->data, list->next->data) == 0)
+			{
+				swap = list->data;
+				list->data = list->next->data;
+				list->next->data = swap;
+				list = start;
+			}
+			else 
+			{
+				list = list->next;
+			}
 		}
-		else
-		{
-			list = list->next;
-		}
-	}
-	return (start);
+		return (start);
 }
 
 int	rs_ascending(int a, int b)
@@ -51,7 +51,7 @@ void	rs_print_list(t_list *list)
 	printf("\n");
 }
 
-t_list	*rs_append_node(int data)
+t_list	*rs_append_node(int	data)
 {
 	t_list	*new_node = (t_list *)malloc(sizeof(t_list));
 	new_node->data = data;
@@ -63,37 +63,36 @@ void	rs_free_list(t_list *head)
 {
 	while (head)
 	{
-		t_list *temp = head;
+		t_list	*temp = head;
 		head = head->next;
 		free(temp);
 	}
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	int	i;
-	t_list *head = NULL;
-	t_list *current = NULL;
-
+	int		i;
+	t_list	*head = NULL;
+	t_list	*current = NULL;
 	i = 1;
 	while (i < argc)
 	{
-		if (head == NULL)
+		if(head == NULL)
 		{
 			head = rs_append_node(atoi(argv[i]));
 			current = head;
 		}
-		else 
+		else
 		{
 			current->next = rs_append_node(atoi(argv[i]));
 			current = current->next;
 		}
 		i++;
 	}
-	printf("Before Sort: \n");
+	printf("Before sort: \n");
 	rs_print_list(head);
 	head = rs_sort_list(head, rs_ascending);
-	printf("After Sort: \n");
+	printf("After sort: \n");
 	rs_print_list(head);
 	rs_free_list(head);
 }

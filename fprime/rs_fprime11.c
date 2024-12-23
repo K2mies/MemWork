@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_fprime10.c                                      :+:      :+:    :+:   */
+/*   rs_fprime11.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/22 18:02:38 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/23 16:32:46 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/23 16:18:22 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/23 16:32:49 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
-	int	i;
-	int	num;
+	int		i;
+	int		num;
 
 	if (argc == 2)
 	{
-		num = atoi(argv[1]);
 		i = 1;
+		num = atoi(argv[1]);
 		if (num == 1)
 			printf("1");
 		while (num >= ++i)
@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 			{
 				printf("%d", i);
 				if (num == i)
-					break;
+					break ;
 				printf("*");
 				num /= i;
 				i = 1;
