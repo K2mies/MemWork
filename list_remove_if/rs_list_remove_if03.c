@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_list_foreach10.c                                :+:      :+:    :+:   */
+/*   rs_list_remove_if03.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:33:26 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/23 18:27:11 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/24 17:42:39 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/24 17:53:14 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	rs_list_foreach(t_list *begin_list, void (*f)(void *))
+void	rs_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)())
 {
-	while (begin_list)
+	if (begin_list == NULL || *begin_list == NULL)
+		return ;
+	t_list	*current = *begin_list;
+	if (cmp(current->data, data_ref) == 0)
 	{
-		(*f)(begin_list->data);
-		begin_list = begin_list->next;
+		*begin_list = current->next;
+		free(current);
+		rs_list_remove_if(begin_list, data_ref, cmp);
+	}
+	else
+	{
+		current = *begin_list;
+		rs_list_remove_if(&current->next, data_ref, cmp);
 	}
 }
 
-void	rs_print_int(void *data)
+int	cmp(void *data, void *ref)
 {
-	printf("%d", *(int *)data);
+	return (*(int *)data - *(int *)ref);
+}
+
+void	rs_print_list(t_list *list)
+{
+	while (list)
+	{
+		printf("%d\n", *(int *)list->data);
+		list = list->next;
+	}
+	printf("\n");
 }
 
 t_list	*rs_append_node(int value)
@@ -38,12 +57,12 @@ t_list	*rs_append_node(int value)
 	return (new_node);
 }
 
-void	rs_free_list(t_list *list)
+void	rs_free_list(t_list *head)
 {
-	while (list)
+	while (head)
 	{
-		t_list	*temp = list;
-		list = list->next;
+		t_list	*temp = head;
+		head = head->next;
 		free(temp->data);
 		free(temp);
 	}
@@ -70,7 +89,12 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	printf("OUTPUT: \n");
-	rs_list_foreach(head, rs_print_int);
+	printf("Before Removal :\n");
+	rs_print_list(head);
+	int	ref = atoi(argv[1]);
+	rs_list_remove_if(&head, &ref, cmp);
+	printf("After Removal :\n");
+	rs_print_list(head);
 	rs_free_list(head);
+
 }

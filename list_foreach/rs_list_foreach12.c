@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_list_foreach10.c                                :+:      :+:    :+:   */
+/*   rs_list_foreach12.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:33:26 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/23 18:27:11 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/24 17:05:51 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/24 17:13:25 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 void	rs_list_foreach(t_list *begin_list, void (*f)(void *))
 {
-	while (begin_list)
+	while(begin_list)
 	{
 		(*f)(begin_list->data);
 		begin_list = begin_list->next;
@@ -25,7 +25,7 @@ void	rs_list_foreach(t_list *begin_list, void (*f)(void *))
 
 void	rs_print_int(void *data)
 {
-	printf("%d", *(int *)data);
+	printf("%d\n", *(int *)data);
 }
 
 t_list	*rs_append_node(int value)
@@ -38,12 +38,12 @@ t_list	*rs_append_node(int value)
 	return (new_node);
 }
 
-void	rs_free_list(t_list *list)
+void	rs_free_list(t_list *head)
 {
-	while (list)
+	while (head)
 	{
-		t_list	*temp = list;
-		list = list->next;
+		t_list	*temp = head;
+		head = head->next;
 		free(temp->data);
 		free(temp);
 	}
@@ -70,7 +70,6 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	printf("OUTPUT: \n");
+	printf("output : \n");
 	rs_list_foreach(head, rs_print_int);
-	rs_free_list(head);
 }

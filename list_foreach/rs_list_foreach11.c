@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_list_foreach10.c                                :+:      :+:    :+:   */
+/*   rs_list_foreach11.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
+/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 16:33:26 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/23 18:27:11 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/24 15:31:23 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/24 15:39:15 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ t_list	*rs_append_node(int value)
 	return (new_node);
 }
 
-void	rs_free_list(t_list *list)
+void	rs_free_list(t_list *head)
 {
-	while (list)
+	while (head)
 	{
-		t_list	*temp = list;
-		list = list->next;
+		t_list	*temp = head;
+		head = head->next;
 		free(temp->data);
 		free(temp);
 	}
@@ -70,7 +70,7 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-	printf("OUTPUT: \n");
+
+	printf("output : \n");
 	rs_list_foreach(head, rs_print_int);
-	rs_free_list(head);
 }
