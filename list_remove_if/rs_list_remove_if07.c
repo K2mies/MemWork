@@ -1,59 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_sort_list18.c                                   :+:      :+:    :+:   */
+/*   rs_list_remove_if07.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 13:08:53 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/27 16:37:47 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/27 16:06:33 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/27 16:23:08 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rs_sort_list.h"
+#include "rs_list.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-t_list	*rs_sort_list(t_list *list, int (*cmp)(int, int))
+void	rs_list_remove_if(t_list **begin_list, int *data_ref, int (*cmp)())
 {
-	int	swap;
-	t_list	*start;
-	start = list;
-	while (list != NULL && list->next != NULL)
+	if (begin_list == NULL || *begin_list == NULL)
+		return ;
+	t_list	*current = *begin_list;
+	if ((*cmp)(current->data, data_ref) == 0)
 	{
-		if ((*cmp)(list->data, list->next->data) == 0)
-		{
-			swap = list->data;
-			list->data = list->next->data;
-			list->next->data = swap;
-			list = start;
-		}
-		else
-		{
-			list = list->next;
-		}
+		*begin_list = current->next;
+		free(current);
+		rs_list_remove_if(begin_list, data_ref, cmp);
 	}
-	return (start);
+	else
+	{
+		current = *begin_list;
+		rs_list_remove_if(&current->next, data_ref, cmp);
+	}
 }
 
-int	rs_ascending(int a, int b)
+int	cmp(void *data, void *ref)
 {
-	return (a <= b);
+	return (*(int *)data - *(int *)ref);
 }
 
 void	rs_print_list(t_list *list)
 {
-	while (list)
+	while(list)
 	{
-		printf("%d\n", list->data);
+		printf("%d\n", *(int *)list->data);
 		list = list->next;
 	}
 	printf("\n");
 }
 
-t_list	*rs_append_node(int data)
+t_list	*rs_append_node(int	value)
 {
 	t_list	*new_node = (t_list *)malloc(sizeof(t_list));
+	int	*data = malloc(sizeof(int));
+	*data = value;
 	new_node->data = data;
 	new_node->next = NULL;
 	return (new_node);
@@ -63,8 +61,9 @@ void	rs_free_list(t_list *head)
 {
 	while (head)
 	{
-		t_list	*temp = head;
+		t_list *temp = head;
 		head = head->next;
+		free(temp->data);
 		free(temp);
 	}
 }
@@ -90,11 +89,11 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-
-	printf("Before sort: \n");
+	printf("before remove:\n");
 	rs_print_list(head);
-	head = rs_sort_list(head, rs_ascending);
-	printf("After sort: \n");
+	int	ref = atoi(argv[1]);
+	rs_list_remove_if(&head, &ref, cmp);
+	printf("after remove:\n");
 	rs_print_list(head);
 	rs_free_list(head);
 }

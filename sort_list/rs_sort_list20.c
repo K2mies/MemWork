@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_sort_list18.c                                   :+:      :+:    :+:   */
+/*   rs_sort_list20.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/25 13:08:53 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/27 16:37:47 by rhvidste         ###   ########.fr       */
+/*   Created: 2024/12/27 16:23:31 by rhvidste          #+#    #+#             */
+/*   Updated: 2024/12/27 16:38:37 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,14 @@ int	rs_ascending(int a, int b)
 	return (a <= b);
 }
 
+t_list	*rs_append_node(int data)
+{
+	t_list	*new_node = (t_list *)malloc(sizeof(t_list));
+	new_node->data = data;
+	new_node->next = NULL;
+	return (new_node);
+}
+
 void	rs_print_list(t_list *list)
 {
 	while (list)
@@ -49,14 +57,6 @@ void	rs_print_list(t_list *list)
 		list = list->next;
 	}
 	printf("\n");
-}
-
-t_list	*rs_append_node(int data)
-{
-	t_list	*new_node = (t_list *)malloc(sizeof(t_list));
-	new_node->data = data;
-	new_node->next = NULL;
-	return (new_node);
 }
 
 void	rs_free_list(t_list *head)
@@ -90,7 +90,6 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
-
 	printf("Before sort: \n");
 	rs_print_list(head);
 	head = rs_sort_list(head, rs_ascending);
