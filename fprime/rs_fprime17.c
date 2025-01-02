@@ -6,7 +6,7 @@
 /*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 13:44:26 by rhvidste          #+#    #+#             */
-/*   Updated: 2024/12/29 13:47:36 by rhvidste         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:02:14 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(int argc, char **argv)
 		int	num = 0;
 
 		num = atoi(argv[1]);
-
 		if (num == 1)
 			printf("1");
 		while (num >= ++i)

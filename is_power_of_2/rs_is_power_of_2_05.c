@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_fprime01.c                                      :+:      :+:    :+:   */
+/*   rs_is_power_of_2_05.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 16:19:23 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/02 15:03:22 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/01/02 14:20:06 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/01/02 14:23:28 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int		main(int argc, char **argv)
-{
-	int		i;
-	int		number;
+int	is_power_of_2(unsigned int n);
 
-	if (argc == 2)
-	{
-		i = 1;
-		number = atoi(argv[1]);
-		if (number == 1)
-			printf("1");
-		while (number >= ++i)
-		{
-			if (number % i == 0)
-			{
-				printf("%d", i);
-				if (number == i)
-					break ;
-				printf("*");
-				number /= i;
-				i = 1;
-			}
-		}
-	}
-	printf("\n");
-	return (0);
+int	main(int argc, char **argv)
+{
+	int	src;
+	(void)argc;
+	src = atoi(argv[1]);
+	printf("res = %d\n", is_power_of_2(src));
+}
+
+int	is_power_of_2(unsigned int n)
+{
+	if (n == 0)
+		return (0);
+	return (n & (n - 1)) == 0;
 }

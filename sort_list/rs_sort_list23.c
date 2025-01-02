@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_sort_list22.c                                   :+:      :+:    :+:   */
+/*   rs_sort_list23.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 16:17:19 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/02 17:37:32 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/01/02 17:24:05 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/01/02 17:41:20 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 t_list	*rs_sort_list(t_list *list, int (*cmp)(int, int))
 {
-	int	swap;
+	int		swap;
 	t_list	*start;
 	start = list;
 	while (list != NULL && list->next != NULL)
@@ -38,7 +38,7 @@ t_list	*rs_sort_list(t_list *list, int (*cmp)(int, int))
 
 int	rs_ascending(int a, int b)
 {
-	return (a <= b);
+	return(a <= b);
 }
 
 t_list	*rs_append_node(int data)
@@ -82,18 +82,18 @@ int	main(int argc, char **argv)
 			head = rs_append_node(atoi(argv[i]));
 			current = head;
 		}
-		else
+		else 
 		{
 			current->next = rs_append_node(atoi(argv[i]));
 			current = current->next;
 		}
 		i++;
 	}
-	printf("Before sort:\n");
+
+	printf("before sort: \n");
 	rs_print_list(head);
 	head = rs_sort_list(head, rs_ascending);
-	printf("After sort: \n");
+	printf("after sort: \n");
 	rs_print_list(head);
 	rs_free_list(head);
-
 }

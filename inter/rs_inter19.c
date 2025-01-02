@@ -1,42 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_fprime01.c                                      :+:      :+:    :+:   */
+/*   rs_inter19.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 16:19:23 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/02 15:03:22 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/01/02 16:15:30 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/01/02 16:22:11 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 
-int		main(int argc, char **argv)
+void	rs_inter(char *s1, char *s2)
 {
-	int		i;
-	int		number;
-
-	if (argc == 2)
+	int		seen[256] = {0};
+	int		i = 0;
+	while (s2[i])
+		seen[(int)s2[i++]] = 1;
+	i = 0;
+	while (s1[i])
 	{
-		i = 1;
-		number = atoi(argv[1]);
-		if (number == 1)
-			printf("1");
-		while (number >= ++i)
+		if (seen[(int)s1[i]] == 1)
 		{
-			if (number % i == 0)
-			{
-				printf("%d", i);
-				if (number == i)
-					break ;
-				printf("*");
-				number /= i;
-				i = 1;
-			}
+			write(1, &s1[i], 1);
+			seen[(int)s1[i]] = 2;
 		}
+		i++;
 	}
-	printf("\n");
+}
+
+int	main(int argc, char **argv)
+{
+	if (argc == 3)
+	{
+		char	*s1;
+		char	*s2;
+
+		s1 = argv[1];
+		s2 = argv[2];
+
+		rs_inter(s1, s2);
+	}
+	write(1, "\n", 1);
 	return (0);
 }

@@ -1,42 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_fprime01.c                                      :+:      :+:    :+:   */
+/*   rs_print_hex12.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 16:19:23 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/02 15:03:22 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/01/02 14:00:29 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/01/02 14:08:17 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 
-int		main(int argc, char **argv)
-{
-	int		i;
-	int		number;
+int	rs_atoi(char *str);
+void	rs_print_hex(int n);
 
+int	main(int argc, char **argv)
+{
 	if (argc == 2)
+		rs_print_hex(rs_atoi(argv[1]));
+	write(1, "\n", 1);
+}
+
+int	rs_atoi(char *str)
+{
+	int	i = 0;
+	int	n = 0;
+
+	while (str[i])
 	{
-		i = 1;
-		number = atoi(argv[1]);
-		if (number == 1)
-			printf("1");
-		while (number >= ++i)
-		{
-			if (number % i == 0)
-			{
-				printf("%d", i);
-				if (number == i)
-					break ;
-				printf("*");
-				number /= i;
-				i = 1;
-			}
-		}
+		n = n * 10 + str[i] - '0';
+		++i;
 	}
-	printf("\n");
-	return (0);
+	return (n);
+}
+
+void	rs_print_hex(int n)
+{
+	char	hex_digits[] = "0123456789abcdef";
+	if (n >= 16)
+		rs_print_hex(n / 16);
+	write(1, &hex_digits[n % 16], 1);
+	
 }

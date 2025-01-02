@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_split28.c                                       :+:      :+:    :+:   */
+/*   rs_split29.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 17:23:24 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/02 17:57:25 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/01/02 17:41:42 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/01/02 17:59:27 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
+
 char	*rs_strncpy(char *s1, char *s2, int n);
 char	**rs_split(char *str);
 
-int	main(int argc, char **argv)
-{
+int		main(int argc, char **argv)
+{	
 	char	*src;
 	char	**res;
-	int	i = 0;
-
+	int		i = 0;
 	(void)argc;
-
+	
 	src = argv[1];
 	res = rs_split(src);
 
@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 
 char	*rs_strncpy(char *s1, char *s2, int n)
 {
-	int	i = -1;
+	int	i = -1
 	while (i++ < n && s2[i])
 		s1[i] = s2[i];
 	s1[i] = '\0';
@@ -50,7 +50,7 @@ char	**rs_split(char *str)
 	int	k = 0;
 	int	wc = 0;
 
-	while (str[i])
+	while(str[i])
 	{
 		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
@@ -62,7 +62,7 @@ char	**rs_split(char *str)
 	char	**out = (char **)malloc(sizeof(char *) * (wc + 1));
 	i = 0;
 	while (str[i])
-	{	
+	{
 		while (str[i] && (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'))
 			i++;
 		j = i;

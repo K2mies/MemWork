@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_rostring26.c                                    :+:      :+:    :+:   */
+/*   rs_rostring28.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/29 16:11:12 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/02 15:17:26 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/01/02 15:18:15 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/01/02 15:29:39 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,39 +24,38 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		char	*str;
-		int	first_word_start;
-		int	first_word_end;
-		int	i = 0;
-		str = argv[1];
+		int		first_word_start;
+		int		first_word_end;
+		int		i = 0;
 
-		while (str[i] && (str[i] == ' ' || str[i] == '\t' ))
+		str = argv[1];
+		while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 			i++;
 		first_word_start = i;
 		while (str[i] && (str[i] != ' ' && str[i] != '\t'))
 			i++;
 		first_word_end = i;
-
 		if (str[i])
 		{
 			while (str[i])
-			{	
-				if (str[i] && (str[i] == ' ' || str[i] == '\t' ))
+			{
+				if (str[i] && (str[i] == ' ' || str[i] == '\t'))
 				{
-					while (str[i] && (str[i] == ' ' || str[i] == '\t' ))
+					while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 						i++;
 					if (str[i])
-						write(1, " ", 1);
+						write (1, " ", 1);
 				}
-				else
+				else 
 				{
-					write(1, &str[i], 1);
+					write (1, &str[i], 1);
 					i++;
 				}
 			}
-			write (1, " ", 1);
+			write(1, " ", 1);
 		}
 		write_word(first_word_start, first_word_end, str);
 	}
-	write (1, "\n", 1);
+	write(1, "\n", 1);
 	return (0);
 }

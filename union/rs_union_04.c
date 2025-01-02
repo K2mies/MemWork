@@ -1,42 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_fprime01.c                                      :+:      :+:    :+:   */
+/*   rs_union_04.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/19 16:19:23 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/02 15:03:22 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/01/02 14:24:06 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/01/02 14:45:06 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int		i;
-	int		number;
-
-	if (argc == 2)
+	if (argc == 3)
 	{
-		i = 1;
-		number = atoi(argv[1]);
-		if (number == 1)
-			printf("1");
-		while (number >= ++i)
+		int	i = 0;
+		int	j = 0;
+		unsigned char	seen[256] = {0};
+		while (argv[1][i])
 		{
-			if (number % i == 0)
-			{
-				printf("%d", i);
-				if (number == i)
-					break ;
-				printf("*");
-				number /= i;
-				i = 1;
+			if (!seen[(unsigned char)argv[1][i]])
+			{	
+				write (1, &argv[1][i], 1);
+				seen[(unsigned char)argv[1][i]] = 1;
 			}
+			i++;
+		}
+		while (argv[2][j])
+		{
+			if (!seen[(unsigned char)argv[2][j]])
+			{
+				write (1, &argv[2][j], 1);
+				seen[(unsigned char)argv[2][j]] = 1;
+			}
+			j++;
 		}
 	}
-	printf("\n");
+	write (1, "\n", 1);
 	return (0);
 }
