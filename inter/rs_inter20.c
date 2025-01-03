@@ -1,44 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_union_04.c                                      :+:      :+:    :+:   */
+/*   rs_inter20.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 14:24:06 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/03 12:03:58 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/01/03 12:09:28 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/01/03 12:14:01 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 
-int	main(int argc, char **argv)
+void	rs_inter(char *s1, char *s2)
 {
-	if (argc == 3)
+	int		seen[256] = {0};
+	int		i = 0;
+
+	while(s2[i])
+		seen[(int)s2[i++]] = 1;
+	i = 0;
+	while (s1[i])
 	{
-		int	i = 0;
-		int	j = 0;
-		unsigned char	seen[256] = {0};
-		while (argv[1][i])
+		if (seen[(int)s1[i]] == 1)
 		{
-			if (!seen[(unsigned char)argv[1][i]])
-			{	
-				write (1, &argv[1][i], 1);
-				seen[(unsigned char)argv[1][i]] = 1;
-			}
-			i++;
+			write(1, &s1[i], 1);
+			seen[(int)s1[i]] = 2;
 		}
-		while (argv[2][j])
-		{
-			if (!seen[(unsigned char)argv[2][j]])
-			{
-				write (1, &argv[2][j], 1);
-				seen[(unsigned char)argv[2][j]] = 1;
-			}
-			j++;
-		}
+		i++;
 	}
-	write (1, "\n", 1);
-	return (0);
+}
+
+int		main(int argc, char **argv)
+{
+		if (argc == 3)
+		{
+			char	*s1;
+			char	*s2;
+
+			s1 = argv[1];
+			s2 = argv[2];
+			
+			rs_inter(s1, s2);
+		}
+		write (1, "\n", 1);
+		return (0);
 }

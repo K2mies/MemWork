@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_union_04.c                                      :+:      :+:    :+:   */
+/*   rs_fprime19.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 14:24:06 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/03 12:03:58 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/01/03 11:29:20 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/01/03 11:32:53 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
-	if (argc == 3)
+	if (argc == 2)
 	{
-		int	i = 0;
-		int	j = 0;
-		unsigned char	seen[256] = {0};
-		while (argv[1][i])
+		int	i = 1;
+		int	num = 0;
+
+		num = atoi(argv[1]);
+
+		if (num == 1)
+			printf("1");
+		while (num >= ++i)
 		{
-			if (!seen[(unsigned char)argv[1][i]])
-			{	
-				write (1, &argv[1][i], 1);
-				seen[(unsigned char)argv[1][i]] = 1;
-			}
-			i++;
-		}
-		while (argv[2][j])
-		{
-			if (!seen[(unsigned char)argv[2][j]])
+			if (num % i == 0)
 			{
-				write (1, &argv[2][j], 1);
-				seen[(unsigned char)argv[2][j]] = 1;
+				printf("%d", i);
+				if (num == i)
+					break ;
+				printf("*");
+				num /= i;
+				i = 1;
 			}
-			j++;
 		}
 	}
-	write (1, "\n", 1);
+	printf("\n");
 	return (0);
 }
