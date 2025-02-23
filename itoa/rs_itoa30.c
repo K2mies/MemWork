@@ -6,23 +6,23 @@
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 11:33:37 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/01/03 11:43:10 by rhvidste         ###   ########.fr       */
+/*   Updated: 2025/01/03 22:16:13 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int		rs_strlen(char *str);
-int		rs_len(int nbr);
+int	rs_strlen(char *str);
+int	rs_len(int nbr);
 char	*rs_itoa(int n);
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int		src;
+	int	src;
 	char	*res;
-	int		len;
-	int		i = 0;
+	int	len;
+	int	i = 0;
 
 	(void)argc;
 
@@ -51,6 +51,8 @@ int	rs_len(int nbr)
 {
 	int		i = 0;
 
+	if (nbr == -2147483648)
+		return (11);;
 	if (nbr == 0)
 		return (1);
 	while (nbr < 0)
