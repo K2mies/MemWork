@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_printf05.c                                      :+:      :+:    :+:   */
+/*   rs_printf07.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 21:46:46 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/24 11:55:47 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/02/24 11:51:33 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/02/24 13:28:23 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_putnbr(int n, int *len);
 void	ft_puthex(unsigned int n, char c, int *len);
 
 void	ft_format(char c, int *len, va_list args);
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 
 void	ft_printpercent(int *len)
 {
@@ -35,14 +35,14 @@ void	ft_putchar(char c, int *len)
 
 void	ft_putstr(char *str, int *len)
 {
-	int	i = -1;
+	int		i = -1;
 
-	if (!str)
+	if(!str)
 	{
 		*len += write(1, "(null)", 6);
 		return ;
 	}
-	while (str[++i])
+	while(str[++i])
 	{
 		*len += write(1, &str[i], 1);
 	}
@@ -81,7 +81,9 @@ void	ft_puthex(unsigned int n, char c, int *len)
 	else
 	{
 		if (c == 'x')
+		{
 			ft_putchar("0123456789abcdef"[n], len);
+		}
 	}
 }
 
@@ -97,7 +99,7 @@ void	ft_format(char c, int *len, va_list args)
 		ft_printpercent(len);
 }
 
-int	ft_printf(const char *str, ...)
+int		ft_printf(const char *str, ...)
 {
 	int	i = 0;
 	int	len = 0;
@@ -122,15 +124,14 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-int	main()
+int main()
 {
 	printf("%s\n", (char *)NULL);
 	ft_printf("%s\n", (char *)NULL);
-	printf("%d\n", 14321);
-	ft_printf("%d\n", 14321);
+	printf("%d\n", 15432);
+	ft_printf("%d\n", 15432);
 	printf("%%\n");
 	ft_printf("%%\n");
-	printf("%x\n", 14321);
-	ft_printf("%x\n", 14321);
-
+	printf("%x\n", 15432);
+	ft_printf("%x\n", 15432);
 }
