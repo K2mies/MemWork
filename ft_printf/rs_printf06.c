@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_printf05.c                                      :+:      :+:    :+:   */
+/*   rs_printf06.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 21:46:46 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/24 10:48:15 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/02/24 10:27:42 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/02/24 10:48:19 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_putnbr(int n, int *len);
 void	ft_puthex(unsigned int n, char c, int *len);
 
 void	ft_format(char c, int *len, va_list args);
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 
 void	ft_printpercent(int *len)
 {
@@ -35,9 +35,9 @@ void	ft_putchar(char c, int *len)
 
 void	ft_putstr(char *str, int *len)
 {
-	int	i = -1;
+	int		i = -1;
 
-	if (!str)
+	if(!str)
 	{
 		*len += write(1, "(null)", 6);
 		return ;
@@ -64,7 +64,7 @@ void	ft_putnbr(int n, int *len)
 	}
 	if (n > 9)
 	{
-		ft_putnbr(n / 10, len);
+		ft_putnbr(n / 10 , len);
 		ft_putnbr(n % 10, len);
 	}
 	else
@@ -81,7 +81,9 @@ void	ft_puthex(unsigned int n, char c, int *len)
 	else
 	{
 		if (c == 'x')
+		{
 			ft_putchar("0123456789abcdef"[n], len);
+		}
 	}
 }
 
@@ -99,8 +101,8 @@ void	ft_format(char c, int *len, va_list args)
 
 int	ft_printf(const char *str, ...)
 {
-	int	i = 0;
-	int	len = 0;
+	int		i = 0;
+	int		len = 0;
 	va_list	args;
 
 	va_start(args, str);
@@ -122,15 +124,14 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-int	main()
+int main()
 {
 	printf("%s\n", (char *)NULL);
 	ft_printf("%s\n", (char *)NULL);
-	printf("%d\n", 14321);
-	ft_printf("%d\n", 14321);
+	printf("%d\n", 14325);
+	ft_printf("%d\n", 14325);
 	printf("%%\n");
 	ft_printf("%%\n");
-	printf("%x\n", 14321);
-	ft_printf("%x\n", 14321);
-
+	printf("%x\n", 14325);
+	ft_printf("%x\n", 14325);
 }
