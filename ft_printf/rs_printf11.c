@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf00.c                                      :+:      :+:    :+:   */
+/*   rs_printf11.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 16:28:23 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/25 11:00:11 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/02/25 10:23:33 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/02/25 10:40:49 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_putnbr(int n, int *len);
 void	ft_puthex(unsigned int n, char c, int *len);
 
 void	ft_format(char c, int *len, va_list args);
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 
 void	ft_printpercent(int *len)
 {
@@ -35,17 +35,16 @@ void	ft_putchar(char c, int *len)
 
 void	ft_putstr(char *str, int *len)
 {
-	int	i = 0;
+	int	i = -1;
 
 	if (!str)
 	{
-		*len += write (1, "(null)", 6);
+		*len += write(1, "(null)", 6);
 		return ;
 	}
-	while (str[i] != '\0')
+	while (str[i])
 	{
 		*len += write(1, &str[i], 1);
-		i++;
 	}
 }
 
@@ -57,13 +56,13 @@ void	ft_putnbr(int n, int *len)
 		ft_putchar('2', len);
 		ft_putnbr(147483648, len);
 	}
-	else if (n < 0)
+	if (n < 0)
 	{
 		ft_putchar('-', len);
 		n = -n;
 		ft_putnbr(n, len);
 	}
-	else if (n > 9)
+	if (n > 9)
 	{
 		ft_putnbr(n / 10, len);
 		ft_putnbr(n % 10, len);
@@ -79,7 +78,7 @@ void	ft_puthex(unsigned int n, char c, int *len)
 		ft_puthex(n / 16, c, len);
 		ft_puthex(n % 16, c, len);
 	}
-	if (n < 16)
+	else
 	{
 		if (c == 'x')
 			ft_putchar("0123456789abcdef"[n], len);
@@ -98,13 +97,13 @@ void	ft_format(char c, int *len, va_list args)
 		ft_printpercent(len);
 }
 
-int	ft_printf(const char *str, ...)
+int		ft_printf(const char *str, ...)
 {
 	int	i = 0;
 	int	len = 0;
-	va_list args;
+	va_list	args;
 
-	va_start (args, str);
+	va_start(args, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
@@ -125,14 +124,12 @@ int	ft_printf(const char *str, ...)
 
 int	main()
 {
-	printf("%d\n", printf("%s", (char *)NULL));
-	printf("%d\n", ft_printf("%s", (char *)NULL));
-	printf("%d\n", printf("%d", 14324));
-	printf("%d\n", ft_printf("%d", 14324));
-	printf("%d\n", printf("%%"));
-	printf("%d\n", ft_printf("%%"));
-	printf("%d\n", printf("%x", 14324));
-	printf("%d\n", ft_printf("%x", 14324));
-
-	return (0);
+	printf("%s\n", (char *)NULL);
+	ft_printf("%s\n", (char *)NULL);
+	printf("%d\n", 54321);
+	ft_printf("%d\n", 54321);
+	printf("%%\n");
+	ft_printf("%%\n");
+	printf("%x\n", 54321);
+	ft_printf("%x\n", 54321);
 }

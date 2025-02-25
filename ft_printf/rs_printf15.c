@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf00.c                                      :+:      :+:    :+:   */
+/*   rs_printf15.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 16:28:23 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/25 11:00:11 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/02/25 11:35:58 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/02/25 11:52:28 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// getconf INT_MIN
 
 #include <unistd.h>
 #include <stdarg.h>
@@ -19,9 +21,8 @@ void	ft_putchar(char c, int *len);
 void	ft_putstr(char *str, int *len);
 void	ft_putnbr(int n, int *len);
 void	ft_puthex(unsigned int n, char c, int *len);
-
 void	ft_format(char c, int *len, va_list args);
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 
 void	ft_printpercent(int *len)
 {
@@ -36,34 +37,32 @@ void	ft_putchar(char c, int *len)
 void	ft_putstr(char *str, int *len)
 {
 	int	i = 0;
-
 	if (!str)
 	{
-		*len += write (1, "(null)", 6);
+		*len += write(1, "(null)", 6);
 		return ;
 	}
-	while (str[i] != '\0')
+	while(str[i])
 	{
 		*len += write(1, &str[i], 1);
 		i++;
 	}
+
 }
 
 void	ft_putnbr(int n, int *len)
 {
 	if (n == -2147483648)
 	{
-		ft_putchar('-', len);
-		ft_putchar('2', len);
-		ft_putnbr(147483648, len);
+		ft_putstr("-2147483648", len);
+		return ;
 	}
-	else if (n < 0)
+	if (n < 0)
 	{
 		ft_putchar('-', len);
 		n = -n;
-		ft_putnbr(n, len);
 	}
-	else if (n > 9)
+	if (n > 9)
 	{
 		ft_putnbr(n / 10, len);
 		ft_putnbr(n % 10, len);
@@ -76,8 +75,8 @@ void	ft_puthex(unsigned int n, char c, int *len)
 {
 	if (n >= 16)
 	{
-		ft_puthex(n / 16, c, len);
-		ft_puthex(n % 16, c, len);
+		ft_puthex(n / 16, c ,len);
+		ft_puthex(n % 16, c ,len);
 	}
 	if (n < 16)
 	{
@@ -98,13 +97,13 @@ void	ft_format(char c, int *len, va_list args)
 		ft_printpercent(len);
 }
 
-int	ft_printf(const char *str, ...)
+int		ft_printf(const char *str, ...)
 {
 	int	i = 0;
 	int	len = 0;
 	va_list args;
 
-	va_start (args, str);
+	va_start(args, str);
 	while (str[i])
 	{
 		if (str[i] == '%')
@@ -125,14 +124,24 @@ int	ft_printf(const char *str, ...)
 
 int	main()
 {
-	printf("%d\n", printf("%s", (char *)NULL));
-	printf("%d\n", ft_printf("%s", (char *)NULL));
-	printf("%d\n", printf("%d", 14324));
-	printf("%d\n", ft_printf("%d", 14324));
-	printf("%d\n", printf("%%"));
-	printf("%d\n", ft_printf("%%"));
-	printf("%d\n", printf("%x", 14324));
-	printf("%d\n", ft_printf("%x", 14324));
-
-	return (0);
+	int	count = 0;
+	int	ft_count = 0;
+	count = printf("%d\n", -54321);
+	ft_count = ft_printf("%d\n", -54321);
+	ft_printf("count = %d\nft_count = %d\n", count, ft_count);
+	count = printf("%ld\n", -2147483648);
+	ft_count = ft_printf("%d\n", -2147483648);
+	ft_printf("count = %d\nft_count = %d\n", count, ft_count);
+	count = printf("%s\n", (char *)NULL);
+	ft_count = ft_printf("%s\n", (char *)NULL);
+	ft_printf("count = %d\nft_count = %d\n", count, ft_count);
+	count = printf("%d\n", 54321);
+	ft_count = ft_printf("%d\n", 54321);
+	ft_printf("count = %d\nft_count = %d\n", count, ft_count);
+	count = printf("%%\n");
+	ft_count = ft_printf("%%\n");
+	ft_printf("count = %d\nft_count = %d\n", count, ft_count);
+	count = printf("%x\n", 54321);
+	ft_count = ft_printf("%x\n", 54321);
+	ft_printf("count = %d\nft_count = %d\n", count, ft_count);
 }
