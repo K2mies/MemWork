@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_printf16.c                                      :+:      :+:    :+:   */
+/*   rs_printf18.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 11:52:43 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/25 16:50:35 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/02/27 15:56:32 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/02/27 16:08:25 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//getconf INT_MIN
 
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
+
+//getconf INT_MIN
 
 void	ft_printpercent(int *len);
 void	ft_putchar(char c, int *len);
@@ -36,16 +36,15 @@ void	ft_putchar(char c, int *len)
 
 void	ft_putstr(char *str, int *len)
 {
-	int	i = 0;
+	int	i = -1;
 	if (!str)
 	{
 		*len += write(1, "(null)", 6);
 		return ;
 	}
-	while (str[i])
+	while (str[++i])
 	{
 		*len += write(1, &str[i], 1);
-		i++;
 	}
 }
 
@@ -96,7 +95,7 @@ void	ft_format(char c, int *len, va_list args)
 		ft_printpercent(len);
 }
 
-int		ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
 	int	i = 0;
 	int	len = 0;

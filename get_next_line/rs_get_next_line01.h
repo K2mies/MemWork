@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_get_next_line00.h                               :+:      :+:    :+:   */
+/*   rs_get_next_line01.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 15:59:50 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/27 17:05:42 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/02/27 16:09:05 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/02/27 17:05:35 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
+# ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-//MACRO
+//MACROS
 # ifndef BUFFER_SIZE
 # define BUFFER_SIZE 42
 # endif
@@ -24,7 +24,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-//Functions
-char	*get_next_line(int fd);
+//DEFINITIONS
+char *get_next_line(int fd);
 
-#endif
+# endif

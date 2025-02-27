@@ -1,102 +1,97 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_printf16.c                                      :+:      :+:    :+:   */
+/*   rs_printf17.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 11:52:43 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/25 16:50:35 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/02/25 16:16:13 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/02/25 16:50:39 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-//getconf INT_MIN
 
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
 
-void	ft_printpercent(int *len);
-void	ft_putchar(char c, int *len);
-void	ft_putstr(char *str, int *len);
-void	ft_putnbr(int n, int *len);
-void	ft_puthex(unsigned int n, char c, int *len);
-void	ft_format(char c, int *len, va_list args);
-int		ft_printf(const char *str, ...);
+void	rs_printpercent(int *len);
+void	rs_putchar(char c, int *len);
+void	rs_putstr(char *str, int *len);
+void	rs_putnbr(int n, int *len);
+void	rs_puthex(unsigned int n, char c, int *len);
+void	rs_format(char c, int *len, va_list args);
+int		rs_printf(const char *str, ...);
 
-void	ft_printpercent(int *len)
+void	rs_printpercent(int *len)
 {
 	*len += write(1, "%", 1);
 }
 
-void	ft_putchar(char c, int *len)
+void	rs_putchar(char c, int *len)
 {
 	*len += write(1, &c, 1);
 }
 
-void	ft_putstr(char *str, int *len)
+void	rs_putstr(char *str, int *len)
 {
 	int	i = 0;
 	if (!str)
 	{
 		*len += write(1, "(null)", 6);
-		return ;
 	}
 	while (str[i])
 	{
 		*len += write(1, &str[i], 1);
-		i++;
 	}
 }
 
-void	ft_putnbr(int n, int *len)
+void	rs_putnbr(int n, int *len)
 {
-	if (n == -2147483648)
+	if(n == -2147483648)
 	{
-		ft_putstr("-2147483648", len);
-		return ;
+		rs_putstr("-2147483648", len);
 	}
 	if (n < 0)
 	{
-		ft_putchar('-', len);
+		rs_putchar('-', len);
 		n = -n;
 	}
 	if (n > 9)
 	{
-		ft_putnbr(n / 10, len);
-		ft_putnbr(n % 10, len);
+		rs_putnbr(n / 10, len);
+		rs_putnbr(n % 10, len);
 	}
 	else
-		ft_putchar(n + 48, len);
+		rs_putchar(n + 48, len);
 }
 
-void	ft_puthex(unsigned int n, char c, int *len)
+void	rs_puthex(unsigned int n, char c, int *len)
 {
 	if (n >= 16)
 	{
-		ft_puthex(n / 16, c, len);
-		ft_puthex(n % 16, c, len);
+		rs_puthex(n / 16, c, len);
+		rs_puthex(n % 16, c, len);
 	}
 	if (n < 16)
 	{
 		if (c == 'x')
-			ft_putchar("0123456789abcdef"[n], len);
+			rs_putchar("0123456789abcdef"[n], len);
 	}
 }
 
-void	ft_format(char c, int *len, va_list args)
+void	rs_format(char c, int *len, va_list args)
 {
 	if (c == 's')
-		ft_putstr(va_arg(args, char *), len);
+		rs_putstr(va_arg(args, char *), len);
 	if (c == 'd')
-		ft_putnbr(va_arg(args, int), len);
+		rs_putnbr(va_arg(args, int), len);
 	if (c == 'x')
-		ft_puthex(va_arg(args, unsigned int), c, len);
+		rs_puthex(va_arg(args, unsigned int), c, len);
 	if (c == '%')
-		ft_printpercent(len);
+		rs_printpercent(len);
 }
 
-int		ft_printf(const char *str, ...)
+int		rs_printf(const char *str, ...)
 {
 	int	i = 0;
 	int	len = 0;
@@ -108,7 +103,7 @@ int		ft_printf(const char *str, ...)
 		if (str[i] == '%')
 		{
 			i++;
-			ft_format(str[i], &len, args);
+			rs_format(str[i], &len, args);
 		}
 		else
 		{
@@ -124,11 +119,11 @@ int		ft_printf(const char *str, ...)
 int	main()
 {
 	printf("%s\n", (char *)NULL);
-	ft_printf("%s\n", (char *)NULL);
+	rs_printf("%s\n", (char *)NULL);
 	printf("%d\n", 54321);
-	ft_printf("%d\n", 54321);
+	rs_printf("%d\n", 54321);
 	printf("%%\n");
-	ft_printf("%%\n");
+	rs_printf("%%\n");
 	printf("%x\n", 54321);
-	ft_printf("%x\n", 54321);
+	rs_printf("%x\n", 54321);
 }
