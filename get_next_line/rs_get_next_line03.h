@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_get_next_line01.h                               :+:      :+:    :+:   */
+/*   rs_get_next_line03.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/27 16:09:05 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/28 11:23:52 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/02/28 16:08:05 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/02/28 16:18:58 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 //MACROS
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 48
 # endif
 
 //INCLUDES
