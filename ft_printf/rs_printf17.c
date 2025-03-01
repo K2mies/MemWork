@@ -6,7 +6,7 @@
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:16:13 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/25 16:50:39 by rhvidste         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:51:05 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ void	rs_putchar(char c, int *len)
 
 void	rs_putstr(char *str, int *len)
 {
-	int	i = 0;
+	int	i = -1;
 	if (!str)
 	{
 		*len += write(1, "(null)", 6);
+		return ;
 	}
-	while (str[i])
+	while (str[++i])
 	{
 		*len += write(1, &str[i], 1);
 	}
@@ -50,6 +51,7 @@ void	rs_putnbr(int n, int *len)
 	if(n == -2147483648)
 	{
 		rs_putstr("-2147483648", len);
+		return ;
 	}
 	if (n < 0)
 	{
@@ -126,4 +128,6 @@ int	main()
 	rs_printf("%%\n");
 	printf("%x\n", 54321);
 	rs_printf("%x\n", 54321);
+	printf("%ld\n", -2147483648);
+	rs_printf("%d\n", -2147483648);
 }
