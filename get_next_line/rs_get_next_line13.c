@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line04.c                                  :+:      :+:    :+:   */
+/*   rs_get_next_line13.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/28 16:36:29 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/02/28 17:00:54 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/03/03 11:36:18 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/03/03 11:43:33 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line04.h"
+# include "rs_get_next_line13.h"
 
-char	*ft_strdup(char *str)
+static char	*ft_strdup(char *str)
 {
 	char	*dest;
 	int		i;
@@ -52,7 +52,7 @@ char	*get_next_line(int fd)
 				break ;
 		}
 		if (line[i] == '\n')
-			break;
+			break ;
 		line[i] = buffer[buffer_pos++];
 		i++;
 	}
@@ -66,4 +66,5 @@ int	main()
 {
 	int	fd = open("txt.txt", O_RDONLY);
 	printf("%s\n", get_next_line(fd));
+	return (0);
 }
