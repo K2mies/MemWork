@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rs_printf26.c                                      :+:      :+:    :+:   */
+/*   rs_printf28.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 11:12:53 by rhvidste          #+#    #+#             */
-/*   Updated: 2025/03/04 10:52:03 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/03/04 11:01:12 by rhvidste          #+#    #+#             */
+/*   Updated: 2025/03/04 11:16:30 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdio.h>
-# include <stdlib.h>
 
 void	ft_printpercent(int *len);
 void	ft_putchar(char c, int *len);
@@ -38,7 +37,7 @@ void	ft_putstr(char *str, int *len)
 	int	i = -1;
 	if (!str)
 	{
-	 	*len += write(1, "(null)", 6);
+		*len += write(1, "(null)", 6);
 		return ;
 	}
 	while (str[++i])
@@ -84,17 +83,17 @@ void	ft_puthex(unsigned int n, char c, int *len)
 
 void	ft_format(char c, int *len, va_list args)
 {
-	if (c == 's')
-		ft_putstr(va_arg(args, char *), len);
-	if (c == 'd')
-		ft_putnbr(va_arg(args, int), len);
-	if (c == 'x')
-		ft_puthex(va_arg(args, unsigned int), c, len);
-	if (c == '%')
-		ft_printpercent(len);
+		if (c == 's')
+			ft_putstr(va_arg(args, char *), len);
+		if (c == 'd')
+			ft_putnbr(va_arg(args, int), len);
+		if (c == 'x')
+			ft_puthex(va_arg(args, unsigned int), c, len);
+		if (c == '%')
+			ft_printpercent(len);
 }
 
-int	ft_printf(const char *str, ...)
+int		ft_printf(const char *str, ...)
 {
 	int	i = 0;
 	int	len = 0;
@@ -119,22 +118,18 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-int	main()
+int main()
 {
+	printf("%d\n", -54321);
+	ft_printf("%d\n", -54321);
 	printf("%ld\n", -2147483648);
 	ft_printf("%d\n", -2147483648);
-	printf("%s\n", (char *)NULL);
-	ft_printf("%s\n", (char *)NULL);
-	printf("%s\n", "test");
-	ft_printf("%s\n", "test");
 	printf("%d\n", 54321);
 	ft_printf("%d\n", 54321);
 	printf("%%\n");
 	ft_printf("%%\n");
-	printf("%d\n", -54321);
-	ft_printf("%d\n", -54321);
 	printf("%x\n", 54321);
 	ft_printf("%x\n", 54321);
-	printf("%x\n", -54321);
-	ft_printf("%x\n", -54321);
+	printf("%s\n", (char *)NULL);
+	ft_printf("%s\n", (char *)NULL);
 }

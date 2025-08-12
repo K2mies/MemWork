@@ -1,0 +1,2 @@
+ ./test "/bin/pwd" ";" "cd" ".." ";" "/bin/echo" "helllo" "Werld" ";" "/bin/pwd"   
+./test "/bin/pwd" "|" "/bin/rev" 
