@@ -6,7 +6,7 @@
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 11:45:33 by rhvidste          #+#    #+#             */
-/*   Updated: 2026/02/04 13:59:07 by rhvidste         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:27:49 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,8 +243,8 @@ bool bigint::operator>=(const bigint& other)const
 }
 
 //non member func
-std::ostream& operator<<(std::ostream& output, const bigint& obj)
+std::ostream& operator<<(std::ostream& out, const bigint& obj)
 {
-    output << obj.getStr();
-    return(output);
+    out << obj.getStr();
+    return(out);
 }

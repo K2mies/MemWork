@@ -6,7 +6,7 @@
 /*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/04 11:43:52 by rhvidste          #+#    #+#             */
-/*   Updated: 2026/02/04 14:14:48 by rhvidste         ###   ########.fr       */
+/*   Updated: 2026/02/04 16:28:28 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ class bigint
 };
 
 // non member operator overlaods
-std::ostream&	operator	<<	( std::ostream& output, const bigint& obj );
+std::ostream&	operator	<<	( std::ostream& out, const bigint& obj );
 
 // non member functions
 unsigned int	stringToUINT	( std::string str );
