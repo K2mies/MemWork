@@ -139,15 +139,15 @@ bigint& bigint::operator++()
 bigint bigint::operator++(int)
 {
     bigint temp = (*this);
-    *(this) = *(this) + bigint(1);
+    (*this) = (*this) + bigint(1);
     return (temp);
 }
 
 bigint bigint::operator<<(unsigned int n)const
 {
     bigint temp = *this;
-
-    temp.str.insert(temp.str.end(), n, '0');
+    size_t  len = temp.str.length();
+    temp.str.insert(len, n, '0');
     //std::cout << temp.str << std::endl;
     return(temp);
 }
@@ -160,7 +160,7 @@ bigint bigint::operator>>(unsigned int n) const
         temp.str = "0";
     else
     {
-        temp.str.erase(temp.str.length() - n, n);
+        temp.str.erase(len - n, n);
     }
     return(temp);
 }

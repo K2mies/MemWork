@@ -21,7 +21,7 @@
 class bigint
 {
 	private:
-		std::string _str;
+		std::string str;
 
 	public:
 		bigint();
