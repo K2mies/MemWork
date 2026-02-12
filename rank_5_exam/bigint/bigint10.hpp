@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bigint08.hpp                                       :+:      :+:    :+:   */
+/*   bigint10.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/09 13:57:57 by rhvidste          #+#    #+#             */
-/*   Updated: 2026/02/09 15:47:06 by rhvidste         ###   ########.fr       */
+/*   Created: 2026/02/10 14:03:41 by rhvidste          #+#    #+#             */
+/*   Updated: 2026/02/10 15:07:53 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef BIGINT_HPP
-#define BIGINT_HPP
+#ifndef	BIGINT_HPP
+#define	BIGINT_HPP
 
 #include<iostream>
 #include<sstream>
@@ -20,13 +20,13 @@
 class bigint
 {
 	private:
-		std::string _str;
-
+		std::string	_str;
+	
 	public:
 	//--------------------------------------------------------- constructors
 	bigint();
 	bigint( unsigned int num );
- 	bigint( const bigint& source );
+	bigint( const bigint& source );
 
 	//--------------------------------------------------------------- getter
 	std::string		getStr()				const;
@@ -37,7 +37,7 @@ class bigint
 	bigint	operator	+	( const bigint& other )		const;
 	bigint&	operator	+=	( const bigint& other );
 
-	bigint&	operator	++	();
+	bigint& operator	++	();
 	bigint	operator	++	( int );
 
 	bigint	operator	<<	( unsigned int n )		const;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bigint08.hpp                                       :+:      :+:    :+:   */
+/*   bigint11.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/09 13:57:57 by rhvidste          #+#    #+#             */
-/*   Updated: 2026/02/09 15:47:06 by rhvidste         ###   ########.fr       */
+/*   Created: 2026/02/10 18:09:21 by rhvidste          #+#    #+#             */
+/*   Updated: 2026/02/10 18:48:06 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef BIGINT_HPP
@@ -20,14 +20,14 @@
 class bigint
 {
 	private:
-		std::string _str;
+		std::string	_str;
 
 	public:
 	//--------------------------------------------------------- constructors
 	bigint();
 	bigint( unsigned int num );
- 	bigint( const bigint& source );
-
+	bigint( const bigint& source );
+	
 	//--------------------------------------------------------------- getter
 	std::string		getStr()				const;
 
