@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   searchable_bag.hpp                                 :+:      :+:    :+:   */
+/*   array_bag.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fatkeski <fatkeski@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/26 19:23:22 by fatkeski          #+#    #+#             */
-/*   Updated: 2026/02/16 11:43:34 by rhvidste         ###   ########.fr       */
+/*   Created: 2025/07/26 19:39:23 by fatkeski          #+#    #+#             */
+/*   Updated: 2025/07/26 19:39:26 by fatkeski         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,20 @@
 
 #include "bag.hpp"
 
-class searchable_bag : virtual public bag // virtual inheritance
+class array_bag : virtual public bag
 {
+ protected:
+	int *data;
+	int size;
+
  public:
-	virtual bool has(int) const = 0; // verilen sayı bag'te var mı yok mu kontrolünü yapar
+	array_bag();
+	array_bag(const array_bag &);
+	array_bag &operator=(const array_bag &other);
+	~array_bag();
+
+	void insert(int);
+	void insert(int *, int);
+	void print() const;
+	void clear();
 };

@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   searchable_array_bag.hpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rhvidste@student.hive.email.com  +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/15 14:49:23 by rhvidste          #+#    #+#             */
-/*   Updated: 2026/02/16 11:28:30 by rhvidste         ###   ########.fr       */
+/*   Created: 2026/02/16 14:21:01 by rhvidste          #+#    #+#             */
+/*   Updated: 2026/02/16 14:56:07 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #pragma once
 
-#include "array_bag.hpp"
-#include "searchable_bag.hpp"
+#include"array_bag.hpp"
+#include"searchable_bag.hpp"
 
 class searchable_array_bag : public array_bag, public searchable_bag
 {
-  public:
-    searchable_array_bag();
-    searchable_array_bag( const searchable_array_bag& source );
-    searchable_array_bag& operator = ( const searchable_array_bag& source );
+	public:
+		searchable_array_bag();
+		searchable_array_bag( const searchable_array_bag& source );
+		searchable_array_bag& operator	=	( const searchable_array_bag& source );
 
-    bool has ( int ) const;
+		bool	has	( int value ) const;
 
-    ~searchable_array_bag();
+		~searchable_array_bag();
 };

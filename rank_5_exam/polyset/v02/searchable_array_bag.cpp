@@ -3,30 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   searchable_array_bag.cpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rhvidste@student.hive.email.com  +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/15 14:49:23 by rhvidste          #+#    #+#             */
-/*   Updated: 2026/02/16 11:40:00 by rhvidste         ###   ########.fr       */
+/*   Created: 2026/02/16 11:20:40 by rhvidste          #+#    #+#             */
+/*   Updated: 2026/02/16 14:28:00 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "searchable_array_bag.hpp"
+
+#include"searchable_array_bag.hpp"
 
 searchable_array_bag::searchable_array_bag(){}
-searchable_array_bag::searchable_array_bag( const searchable_array_bag& source ){}
+searchable_array_bag::searchable_array_bag( const searchable_array_bag& source ) : array_bag( source ) {}
 
-searchable_array_bag& searchable_array_bag::operator = ( const searchable_array_bag& source )
+searchable_array_bag& searchable_array_bag::operator	=	( const searchable_array_bag& source )
 {
-  if ( this != &source )
-    array_bag::operator=(source);
-  return ( *this );
+	if ( this != &source )
+		array_bag::operator=( source );
+	return ( *this );
 }
 
-bool searchable_array_bag::has ( int value ) const
+bool	searchable_array_bag::has	( int value ) const
 {
-  for ( int i = 0; i < this->size; i++ )
-    if ( this->data[i] == value )
-      return ( true);
-  return ( false );
+	for ( int i = 0; i < this->size; i++ )
+		if ( this->data[i] == value )
+			return ( true );
+	return ( false );
 }
 
 searchable_array_bag::~searchable_array_bag(){}

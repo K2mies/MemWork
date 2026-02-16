@@ -3,31 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   set.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhvidste <rhvidste@student.hive.email.com  +#+  +:+       +#+        */
+/*   By: rhvidste <rhvidste@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/15 15:06:04 by rhvidste          #+#    #+#             */
-/*   Updated: 2026/02/16 12:10:08 by rhvidste         ###   ########.fr       */
+/*   Created: 2026/02/16 14:45:58 by rhvidste          #+#    #+#             */
+/*   Updated: 2026/02/16 14:54:05 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include"searchable_bag.hpp"
+
+#pragma once
+
+#include "searchable_bag.hpp"
 
 class set
 {
-  private:
-    searchable_bag& bag;
-  public:
-    set() = delete;
-    set( const set& source ) = delete;
-    set& operator = ( const set& source) = delete;
-    set( searchable_bag& s_bag );
+	private:
+		searchable_bag&	bag;
+	public:
+		set() = delete;
+		set( const set& source ) = delete;
+		set& operator	=	( const set& source ) = delete;
+		set( searchable_bag& s_bag );
 
-    bool  has( int value ) const;
-    void  insert ( int value );
-    void  insert ( int* data, int size );
-    void  print();
-    void  clear();
+		bool	has ( int value )	const;
+		void	insert( int value );
+		void	insert( int *data, int size );
+		void	print();
+		void	clear();
 
-    const searchable_bag& get_bag();
+		const searchable_bag&	get_bag();
 
-    ~set();
+		~set();
 };
+
