@@ -1,10 +1,12 @@
-#include "bigint17.hpp"
+#include "bigint18.hpp"
 #include <iostream>
 
 int main()
 {
     const bigint a(42);
     bigint b(21), c, d(1337), e(d);
+    //const bigint a(55542238);
+    //bigint b(55529838), c, d(29384), e(d);
 
     std::cout << "a = " << a << std::endl;
     std::cout << "b = " << b << std::endl;

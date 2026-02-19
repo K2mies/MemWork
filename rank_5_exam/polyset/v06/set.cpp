@@ -1,25 +1,26 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   set.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rvidste@student.42.fr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/16 21:26:41 by rhvidste          #+#    #+#             */
-/*   Updated: 2026/02/18 18:18:00 by rhvidste         ###   ########.fr       */
+/*   Created: 2026/02/19 11:43:31 by rhvidste          #+#    #+#             */
+/*   Updated: 2026/02/19 11:50:08 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "set.hpp"
 #include "searchable_array_bag.hpp"
 
-set::set( searchable_bag& s_bag ) : bag( s_bag ) {}
+set::set( searchable_bag& s_bag ) : bag ( s_bag ) {}
 
 bool	set::has	( int value )	const
-{ return ( bag.has ( value ) ); }
+{ return ( bag.has( value ) ); }
 
 void	set::insert	( int value )
 {
-	if ( !(this->has ( value ) ) )
+	if (!( this->has ( value )))
 		bag.insert( value );
 }
 
@@ -29,9 +30,13 @@ void	set::insert	( int *data, int size )
 		this->insert( data[i] );
 }
 
-void	set::print	()	const{ bag.print(); }
-void	set::clear	()	     { bag.clear(); } 
+void	set::print	()		const
+{ bag.print(); }
 
-const searchable_bag&	set::get_bag(){ return ( this->bag ); }
+void	set::clear	()
+{ bag.clear(); }
+
+const	searchable_bag&		set::get_bag()
+{ return ( this->bag ); }
 
 set::~set(){}
