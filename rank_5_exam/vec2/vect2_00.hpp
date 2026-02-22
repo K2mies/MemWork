@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2_00.hpp                                        :+:      :+:    :+:   */
+/*   vect2_00.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhvidste <rhvidste@student.hive.email.com  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/19 13:15:37 by rhvidste          #+#    #+#             */
-/*   Updated: 2026/02/19 13:17:23 by rhvidste         ###   ########.fr       */
+/*   Updated: 2026/02/20 16:43:26 by rhvidste         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef VECT2_HPP
@@ -57,7 +57,7 @@ class vect2
 };
 
 //-------------------------------------------------------- non-member functions
-vect2 operator  * ( int num, const vect2& obj );
-std::ostream& operator  <<  ( std::ostream& out, const vect2& obj );
+vect2 		operator	*	 ( int num, const vect2& obj );
+std::ostream&	operator	<< 	 ( std::ostream& out, const vect2& obj );
 
 #endif
