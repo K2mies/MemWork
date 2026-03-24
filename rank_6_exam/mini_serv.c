@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 #include <sys/select.h>
 
-fd_set readfds, exceptfds;
+fd_set readfds, activefds;
 int clients[FD_SETSIZE], count = 0, sockfd;
 char *msgs[FD_SETSIZE], in_buf[100001], out_buf[100001];
 
@@ -68,7 +68,7 @@ void notify(int sent)
 {
 	for (int fd = 3; fd <= FD_SETSIZE; fd++)
 	{
-		if (FD_ISSET(fd, &exceptfds) && fd != sent && fd != sockfd)
+		if (FD_ISSET(fd, &activefds) && fd != sent && fd != sockfd)
 			send(fd, out_buf, strlen(out_buf), 0);
 	}
 }
@@ -104,12 +104,12 @@ int main(int ac, char** av)
 		fatal_error(); 
 	}
 
-	FD_ZERO(&exceptfds);
-	FD_SET(sockfd, &exceptfds);
+	FD_ZERO(&activefds);
+	FD_SET(sockfd, &activefds);
 
 	while (1)
 	{
-		readfds = exceptfds;
+		readfds = activefds;
 
 		if (select(FD_SETSIZE, &readfds, NULL, NULL, NULL) < 0)
 			continue ;
@@ -126,7 +126,7 @@ int main(int ac, char** av)
 				if (connfd < 0) { 
 					fatal_error();
 				}
-				FD_SET(connfd, &exceptfds);
+				FD_SET(connfd, &activefds);
 				clients[connfd] = count;
 				count++;
 				msgs[connfd] = NULL;
@@ -140,7 +140,7 @@ int main(int ac, char** av)
 				{
 					sprintf(out_buf, "server: client %d just left\n", clients[fd]);
 					notify(fd);
-					FD_CLR(fd, &exceptfds);
+					FD_CLR(fd, &activefds);
 					free(msgs[fd]);
 					msgs[fd] = NULL;
 					close(fd);
