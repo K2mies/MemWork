@@ -67,17 +67,18 @@ void  fatal_error(void)
 
 void notify( int sent )
 {
-  for ( int fd = 3; fd < FD_SETSIZE; fd++ )
+  for (int fd = 3; fd < FD_SETSIZE; fd++ )
   {
-    if (FD_ISSET(fd, &activefds) && fd != sent && fd != sockfd )
-      send(fd, out_buf, strlen( out_buf ), 0 );
+    if (FD_ISSET(fd, &activefds) && fd != sent && fd != sockfd)
+      send(fd, out_buf, strlen(out_buf), 0 );
   }
 }
 
-int main( int argc, char **argv ) {
-  if (argc != 2 )
+
+int main(int argc, char **argv) {
+  if ( argc != 2 )
   {
-    write(2, "Wrong number of arguments\n", 27);
+    write(2, "Wrong number of arguments", 27);
     exit(1);
   }
 	int connfd;
@@ -109,16 +110,13 @@ int main( int argc, char **argv ) {
 		printf("cannot listen\n"); 
 		exit(0); 
 	}
-
-  FD_ZERO( &activefds );
-  FD_SET( sockfd, &activefds );
-
-  while (1)
+  FD_ZERO(&activefds);
+  FD_SET(sockfd, &activefds);
+  while(1)
   {
     readfds = activefds;
-    if ( select(FD_SETSIZE, &readfds, NULL, NULL, NULL ) < 0 )
+    if (select(FD_SETSIZE, &readfds, NULL, NULL, NULL ) < 0 )
       continue;
-
     for (int fd = 3; fd < FD_SETSIZE; fd++ )
     {
       if (!FD_ISSET(fd, &readfds))
@@ -137,13 +135,13 @@ int main( int argc, char **argv ) {
         clients[connfd] = count;
         count++;
         msgs[connfd] = NULL;
-        sprintf(out_buf, "server: client %d has joined\n", clients[connfd]);
+        sprintf( out_buf, "server: client %d has arrived\n", clients[connfd]);
         notify(connfd);
       }
       else
       {
         int rec_bytes = recv(fd, in_buf, 100000, 0 );
-        if (rec_bytes <= 0 )
+        if (rec_bytes <= 0)
         {
           sprintf(out_buf, "server: client %d has left\n", clients[fd]);
           notify(fd);
@@ -156,13 +154,13 @@ int main( int argc, char **argv ) {
         else
         {
           in_buf[rec_bytes] = '\0';
-          msgs[fd] = str_join ( msgs[fd], in_buf);
-          char *temp = NULL;
-          while (extract_message( &(msgs[fd]), &temp ) )
+          msgs[fd] = str_join( msgs[fd], in_buf);
+          char  *temp = NULL;
+          while (extract_message( &(msgs[fd]), &temp ))
           {
             sprintf(out_buf, "client %d: %s", clients[fd], temp);
             notify(fd);
-            free (temp);
+            free(temp);
           }
         }
       }
