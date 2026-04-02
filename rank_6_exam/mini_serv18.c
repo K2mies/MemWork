@@ -9,7 +9,7 @@
 #include <sys/select.h>
 
 fd_set	readfds, activefds;
-int		clients[FD_SETSIZE], count = 0, sockfd;
+int	clients[FD_SETSIZE], count = 0, sockfd, maxfd;
 char	*msgs[FD_SETSIZE], in_buf[100001], out_buf[100001];
 
 int extract_message(char **buf, char **msg)
@@ -67,20 +67,20 @@ void	fatal_error( void )
 
 void	notify( int sent )
 {
-	for ( int fd = 3; fd < FD_SETSIZE; fd++ )
+	for ( int fd = 3; fd <= maxfd; fd++ )
 	{
-		if (  FD_ISSET( fd, &activefds ) && fd != sent && fd != sockfd )
-			send( fd, out_buf, strlen( out_buf ), 0 );
+		if ( FD_ISSET ( fd, &activefds ) && fd != sent && fd != sockfd )
+			if ( send ( fd, out_buf, strlen( out_buf ), 0 ) < 0)
+        continue;
 	}
 }
 
-
 int main( int argc, char **argv ) {
-	if ( argc != 2  )
+	if ( argc != 2 )
 	{
-		write	( 2, "wrong number of arguements\n", 27 );
+		write	( 2, "wrong number of arguments\n", 27 );
 		exit	( 1 );
-	} 
+	}
 	int connfd;
 	struct sockaddr_in servaddr, cli; 
 
@@ -97,7 +97,7 @@ int main( int argc, char **argv ) {
 	// assign IP, PORT 
 	servaddr.sin_family = AF_INET; 
 	servaddr.sin_addr.s_addr = htonl(2130706433); //127.0.0.1
-	servaddr.sin_port = htons(atoi ( argv[1] )  ); 
+	servaddr.sin_port = htons( atoi( argv[1] ) ); 
 
 	// Binding newly created socket to given IP and verification 
 	if ((bind(sockfd, (const struct sockaddr *)&servaddr, sizeof(servaddr))) != 0) { 
@@ -110,62 +110,88 @@ int main( int argc, char **argv ) {
 		printf("cannot listen\n"); 
 		exit(0); 
 	}
-	
+
 	FD_ZERO	( &activefds );
 	FD_SET	( sockfd, &activefds );
+
+  maxfd = sockfd;
 
 	while ( 1 )
 	{
 		readfds = activefds;
-		if ( select( FD_SETSIZE, &readfds, NULL, NULL, NULL )  < 0 )
+		if ( select( maxfd + 1, &readfds, NULL, NULL, NULL ) < 0 )
 			continue;
-		for ( int fd = 3; fd < FD_SETSIZE; fd++ )
+
+		for ( int fd = 3; fd <= maxfd; fd++ )
 		{
-			if ( !FD_ISSET(  fd, &readfds ) )
+			if ( !FD_ISSET( fd, &readfds ) )
 				continue;
 			if ( fd == sockfd )
 			{
 				socklen_t len = sizeof( cli );
 				connfd = accept(sockfd, (struct sockaddr *)&cli, &len);
-				if (connfd < 0) { 
-			        printf("server acccept failed...\n"); 
-			        exit(0); 
-			    }else {
-			        printf("server acccepted the client...\n");
-				}
-				FD_SET	(  connfd, &activefds );
+				if (connfd < 0) 
+          continue;
+        if (connfd > maxfd)
+          maxfd = connfd;
+				FD_SET	( connfd, &activefds );
 				clients[connfd] = count;
 				count++;
 				msgs[connfd] = NULL;
 				sprintf	( out_buf, "server: client %d has arrived\n", clients[connfd] );
 				notify	( connfd );
+        continue;
 			}
 			else
 			{
-				int	rec_bytes = recv( fd, in_buf, 100000, 0 );
+				int	rec_bytes = recv ( fd, in_buf, 100000, 0 );
 				if ( rec_bytes <= 0 )
 				{
-					sprintf	(out_buf, "server: client %d has left\n", clients[fd] );
+					sprintf	( out_buf, "server: client %d has left\n", clients[fd] );
 					notify	( fd );
 					FD_CLR	( fd, &activefds );
 					free	( msgs[fd] );
 					msgs[fd] = NULL;
 					close	( fd );
-					break;
+					continue;
 				}
 				else
 				{
-					in_buf[rec_bytes]  = '\0';
-					msgs[fd] = str_join (  msgs[fd], in_buf );
+					in_buf[rec_bytes] = '\0';
+					char *msg = str_join ( msgs[fd], in_buf );
+          if (!msg)
+          {
+            for ( int fd = 3; fd <= maxfd; fd++)
+            {
+              if ( FD_ISSET( fd, &activefds ) )
+                close ( fd );
+            }
+            close ( sockfd );
+            fatal_error();
+          }
+          msgs[fd] = msg;
+
+          int   res;
 					char	*temp = NULL;
-					while ( extract_message( &(msgs[fd]), &temp ) )
+					while ( ( res = extract_message ( &( msgs[fd] ), &temp ) ) == 1 )
 					{
-						sprintf	( out_buf, "client %d: %s", clients[fd], temp );
+						sprintf ( out_buf, "client %d: %s", clients[fd], temp );
 						notify	( fd );
-						free	( temp );
+					  free	( temp );	
+            temp = NULL;
 					}
+          if ( res == -1 )
+          {
+            for ( int i = 3; fd <= maxfd; fd++)
+            {
+              if ( FD_ISSET( i, &activefds ) && i != sockfd )
+                close( i );
+            }
+            close ( sockfd );
+            fatal_error();
+          }
 				}
 			}
 		}
-	}
+	} 
 }
